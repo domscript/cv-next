@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
-import { prototype } from "stream";
 import sort from "../utils/sort";
 
 interface CanvasProps {
+  children: React.ReactNode;
   name?: string;
   width: number;
   height: number;

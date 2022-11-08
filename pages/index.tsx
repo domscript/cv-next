@@ -35,7 +35,7 @@ export default function Home() {
             <p>Instantly.</p>
           </li>
           <li className={styles.card}>
-            <Canvas width="300" height="300">
+            <Canvas width={300} height={300}>
               <section className="myButtons">
                 <button className="btn" type="button" data-sort="bubble">
                   Bubble Sort
