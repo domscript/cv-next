@@ -1,5 +1,9 @@
 import { Column } from "./column.js";
 import { bubbleSort } from "./algorithms/bubbleSort.js";
+import { bubbleSortBack } from "./algorithms/bubbleSortBack.js";
+import { selectionSort } from "./algorithms/selectionSort.js";
+import { selectionSortBack } from "./algorithms/selectionSortBack.js";
+import { insertionSort } from "./algorithms/insertionSort.js";
 
 export default function sort(canvas, context) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
