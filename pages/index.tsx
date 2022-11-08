@@ -38,19 +38,19 @@ export default function Home() {
             <Canvas width={300} height={300}>
               <section className="myButtons">
                 <button className="btn" type="button" data-sort="bubble">
-                  Bubble Sort
+                  BS
                 </button>
                 <button className="btn" type="button" data-sort="bubbleBack">
-                  Bubble Sort Back
+                  BSB
                 </button>
                 <button className="btn" type="button" data-sort="selection">
-                  Selection Sort
+                  SS
                 </button>
                 <button className="btn" type="button" data-sort="selectionBack">
-                  Selection Sort Back
+                  SSB
                 </button>
                 <button className="btn" type="button" data-sort="insertion">
-                  Insertion Sort
+                  IS
                 </button>
               </section>
               {/* <section className="myRange">
