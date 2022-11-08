@@ -3,9 +3,10 @@ import sort from "../utils/sort";
 
 interface CanvasProps {
   children: React.ReactNode;
+  className: string;
   name?: string;
-  width: number;
-  height: number;
+  // width: number;
+  // height: number;
 }
 
 const Canvas = (props: CanvasProps): JSX.Element => {
@@ -17,7 +18,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     if (context === null) return;
     sort(canvas, context);
   }, []);
-  return <canvas ref={canvasRef} {...props} />;
+  return <canvas width={500} height={500} ref={canvasRef} {...props} />;
 };
 
 export default Canvas;
