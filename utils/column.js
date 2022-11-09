@@ -1,11 +1,12 @@
 import { lerp } from "./math.js";
 
 export class Column {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, data) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.data = data;
     this.queue = [];
   }
 
@@ -24,6 +25,8 @@ export class Column {
   }
 
   draw(context) {
+    const data = this.data;
+
     let changed = false;
     if (this.queue.length > 0) {
       const { x, y } = this.queue.shift();
@@ -34,9 +37,10 @@ export class Column {
     const left = this.x - this.width / 2;
     const top = this.y - this.height;
     const right = this.x + this.width / 2;
+    const [width, height] = [this.width, this.height];
 
     context.beginPath();
-    context.fillStyle = "#333";
+    context.fillStyle = data.detail[0].fill;
     context.moveTo(left, top);
     context.lineTo(left, this.y);
     context.ellipse(
@@ -62,6 +66,29 @@ export class Column {
     );
     context.fill();
     context.stroke();
+
+    const sizeXY = data.viewBox?.split(" ");
+    const [sizeX, sizeY] = [sizeXY[2] - sizeXY[0], sizeXY[3] - sizeXY[1]];
+    const size = sizeX / width;
+
+    const zoom = 0.99;
+    for (let i = 0; i < data.detail.length; i++) {
+      context.fillStyle = data.detail[i].fill;
+
+      const p1 = new Path2D(data.detail[i].path);
+      const m = new DOMMatrix();
+      const p = new Path2D();
+      const t = m
+        .scale((1 / size) * zoom)
+        .translate(
+          (left * size) / zoom,
+          ((top + height / 2 - width / 2) * size) / zoom
+        );
+
+      p.addPath(p1, t);
+      // context.stroke(p);
+      context.fill(p);
+    }
     return changed;
   }
 }

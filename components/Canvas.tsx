@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from "react";
+import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
+import room from "../utils/room";
 
 interface CanvasProps {
   children: React.ReactNode;
   className: string;
-  name?: string;
-  // width: number;
-  // height: number;
+  width: number;
+  height: number;
+  data: DataSVG[] | [];
 }
 
 const Canvas = (props: CanvasProps): JSX.Element => {
@@ -16,9 +18,18 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     if (canvas === null) return;
     const context = canvas.getContext("2d");
     if (context === null) return;
-    sort(canvas, context);
+    switch (props.className) {
+      case "sort":
+        sort(canvas, context, props.data);
+        break;
+      case "room":
+        room(canvas, context, props.data);
+        break;
+      default:
+        break;
+    }
   }, []);
-  return <canvas width={500} height={500} ref={canvasRef} {...props} />;
+  return <canvas ref={canvasRef} {...props} />;
 };
 
 export default Canvas;

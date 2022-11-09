@@ -2,8 +2,35 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Canvas from "../components/Canvas";
+import {
+  html5,
+  JavaScript,
+  TypeScript,
+  SaSS,
+  Webpack,
+  NodeJS,
+  Css,
+  python,
+  Clang,
+  TailwindCSS,
+  vsCode,
+  PostCSS,
+  git,
+} from "../utils/pathsSVG";
 
 export default function Home() {
+  const dataSVGlang = [
+    html5,
+    SaSS,
+    PostCSS,
+    Clang,
+    python,
+    Css,
+    TypeScript,
+    JavaScript,
+  ];
+  const dataSVG = [Webpack, NodeJS, TailwindCSS, vsCode, git];
+
   return (
     <>
       <Head>
@@ -18,24 +45,70 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{" "}
+          Get started by editing
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
         <ul className={styles.grid}>
           <li className={styles.card}>
-            <p>Learn!</p>
+            <Canvas
+              width={500}
+              height={500}
+              className="sort"
+              data={dataSVGlang}
+            >
+              <section className="myButtons">
+                <button className="btn" type="button" data-sort="bubble">
+                  BS
+                </button>
+                <button className="btn" type="button" data-sort="bubbleBack">
+                  BSB
+                </button>
+                <button className="btn" type="button" data-sort="selection">
+                  SS
+                </button>
+                <button className="btn" type="button" data-sort="selectionBack">
+                  SSB
+                </button>
+                <button className="btn" type="button" data-sort="insertion">
+                  IS
+                </button>
+              </section>
+            </Canvas>
           </li>
 
           <li className={styles.card}>
-            <p>Discover.</p>
+            <Canvas
+              width={500}
+              height={500}
+              className="room"
+              data={dataSVGlang}
+            >
+              <section className="myButtons">
+                <button className="btn" type="button" data-sort="bubble">
+                  BS
+                </button>
+                <button className="btn" type="button" data-sort="bubbleBack">
+                  BSB
+                </button>
+                <button className="btn" type="button" data-sort="selection">
+                  SS
+                </button>
+                <button className="btn" type="button" data-sort="selectionBack">
+                  SSB
+                </button>
+                <button className="btn" type="button" data-sort="insertion">
+                  IS
+                </button>
+              </section>
+            </Canvas>{" "}
           </li>
 
           <li className={styles.card}>
             <p>Instantly.</p>
           </li>
           <li className={styles.card}>
-            <Canvas className="sort">
+            <Canvas width={500} height={500} className="sort" data={dataSVG}>
               <section className="myButtons">
                 <button className="btn" type="button" data-sort="bubble">
                   BS

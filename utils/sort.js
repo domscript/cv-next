@@ -6,13 +6,12 @@ import { selectionSort } from "./algorithms/selectionSort.js";
 import { selectionSortBack } from "./algorithms/selectionSortBack.js";
 import { insertionSort } from "./algorithms/insertionSort.js";
 
-export default function sort(canvas, context) {
+export default function sort(canvas, context, data = []) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
   const margin = 30;
   const buttonsGap = 8;
   const buttons = [];
   const buttonsNum = myButtons.children.length;
-
   const buttonSpacing = (canvas.width - margin * 2) / buttonsNum;
 
   for (let j = 0; j < buttonsNum; j++) {
@@ -24,7 +23,7 @@ export default function sort(canvas, context) {
     buttons[j] = new Button(x, y, width, height, el);
     buttons[j].draw(context);
   }
-  let amount = 10;
+  let amount = data.length;
   // let speed;
   const maxColumnHeight = canvas.height * 0.5;
   let array = [];
@@ -41,7 +40,7 @@ export default function sort(canvas, context) {
     const gap = (spacing * 2) / amount;
 
     for (let i = 0; i < amount; i++) {
-      array[i] = Math.random() * 0.8 + 0.15;
+      array[i] = Math.random() * 0.8 + 0.2;
     }
     moves = [];
     for (let i = 0; i < array.length; i++) {
@@ -49,7 +48,7 @@ export default function sort(canvas, context) {
       const y = canvas.height * 0.8 - margin - i * grow;
       const width = spacing - gap;
       const height = maxColumnHeight * array[i];
-      cols[i] = new Column(x, y, width, height);
+      cols[i] = new Column(x, y, width, height, data[i]);
     }
   }
   init();
