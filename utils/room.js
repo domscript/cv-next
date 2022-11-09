@@ -21,10 +21,7 @@ export default function sort(canvas, context, data = []) {
   context.beginPath();
   const img = new Image();
   img.src = "image/room2.svg";
-  console.log(img);
   img.onload = () => {
-    console.log(img);
-
     context.drawImage(img, 0, 0, canvas.width, canvas.height);
   };
 }

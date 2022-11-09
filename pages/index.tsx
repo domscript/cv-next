@@ -17,6 +17,23 @@ import {
   PostCSS,
   git,
 } from "../utils/pathsSVG";
+import {
+  Events,
+  Apps,
+  Phone,
+  Video,
+  Webinars,
+  TeamChat,
+  MarketPlace,
+  Solvvy,
+  Whiteboard,
+  Api,
+  ZoomOI,
+  DigitalSignage,
+  ConferenceRooms,
+  WorkSpace,
+  ContactCenter,
+} from "../utils/pathsSVG";
 
 export default function Home() {
   const dataSVGlang = [
@@ -30,6 +47,23 @@ export default function Home() {
     JavaScript,
   ];
   const dataSVG = [Webpack, NodeJS, TailwindCSS, vsCode, git];
+  const skillsSVG = [
+    Events,
+    Apps,
+    Phone,
+    Video,
+    Webinars,
+    TeamChat,
+    MarketPlace,
+    Solvvy,
+    Whiteboard,
+    Api,
+    ZoomOI,
+    DigitalSignage,
+    ConferenceRooms,
+    WorkSpace,
+    ContactCenter,
+  ];
 
   return (
     <>
@@ -105,7 +139,25 @@ export default function Home() {
           </li>
 
           <li className={styles.card}>
-            <p>Instantly.</p>
+            <Canvas width={500} height={500} className="wheel" data={skillsSVG}>
+              <section className="myButtons">
+                <button className="btn" type="button" data-sort="bubble">
+                  BS
+                </button>
+                <button className="btn" type="button" data-sort="bubbleBack">
+                  BSB
+                </button>
+                <button className="btn" type="button" data-sort="selection">
+                  SS
+                </button>
+                <button className="btn" type="button" data-sort="selectionBack">
+                  SSB
+                </button>
+                <button className="btn" type="button" data-sort="insertion">
+                  IS
+                </button>
+              </section>
+            </Canvas>{" "}
           </li>
           <li className={styles.card}>
             <Canvas width={500} height={500} className="sort" data={dataSVG}>

@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
 import room from "../utils/room";
+import wheel from "../utils/wheel";
 
 interface CanvasProps {
   children: React.ReactNode;
@@ -24,6 +25,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         break;
       case "room":
         room(canvas, context, props.data);
+        break;
+      case "wheel":
+        wheel(canvas, context, props.data);
         break;
       default:
         break;
