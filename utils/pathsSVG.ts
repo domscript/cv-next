@@ -4,6 +4,7 @@ interface DataSVG {
     fill: string;
     path: string;
   }[];
+  title: string;
   text?: string[];
   group?: string;
 }
@@ -11,6 +12,7 @@ interface DataSVG {
 export default DataSVG;
 
 export const Events: DataSVG = {
+  title: "events",
   group: "m1",
   text: ["Events"],
   viewBox: "0 0 500 380",
@@ -24,7 +26,7 @@ export const Events: DataSVG = {
 
 export const Apps: DataSVG = {
   group: "m1",
-
+  title: "apps",
   text: ["Apps"],
   viewBox: "0 0 400 400",
   detail: [
@@ -37,7 +39,7 @@ export const Apps: DataSVG = {
 
 export const Phone: DataSVG = {
   group: "m1",
-
+  title: "phone",
   text: ["Phone"],
   viewBox: "0 0 512 512",
   detail: [
@@ -69,7 +71,7 @@ export const CardDiamond = {
 
 export const Video: DataSVG = {
   group: "m1",
-
+  title: "video",
   text: ["Meetings"],
   viewBox: "0 0 334 187",
   detail: [
@@ -81,6 +83,7 @@ export const Video: DataSVG = {
 };
 
 export const Webinars: DataSVG = {
+  title: "webinars",
   text: ["Webinars"],
   group: "m2",
 
@@ -95,9 +98,8 @@ export const Webinars: DataSVG = {
 
 export const TeamChat: DataSVG = {
   group: "m2",
-
+  title: "teamChat",
   text: ["Team Chat"],
-
   viewBox: "0 0 640 512",
   detail: [
     {
@@ -109,7 +111,7 @@ export const TeamChat: DataSVG = {
 
 export const MarketPlace: DataSVG = {
   group: "m2",
-
+  title: "marketplace",
   text: ["Marketplace"],
   viewBox: "0 0 448 512",
   detail: [
@@ -122,7 +124,7 @@ export const MarketPlace: DataSVG = {
 
 export const Solvvy: DataSVG = {
   group: "m3",
-
+  title: "solvvy",
   text: ["Solvyy"],
 
   viewBox: "0 0 450 505",
@@ -136,7 +138,7 @@ export const Solvvy: DataSVG = {
 
 export const Whiteboard: DataSVG = {
   group: "m4",
-
+  title: "whiteboard",
   text: ["Whiteboard"],
   viewBox: "0 0 450 369",
   detail: [
@@ -149,9 +151,8 @@ export const Whiteboard: DataSVG = {
 
 export const Api: DataSVG = {
   group: "m4",
-
+  title: "api",
   text: ["API"],
-
   viewBox: "0 0 450 398",
   detail: [
     {
@@ -163,9 +164,8 @@ export const Api: DataSVG = {
 
 export const ZoomOI: DataSVG = {
   group: "m5",
-
+  title: "zoomoi",
   text: ["Zoom", "for Sales"],
-
   viewBox: "0 0 450 350",
   detail: [
     {
@@ -177,7 +177,7 @@ export const ZoomOI: DataSVG = {
 
 export const DigitalSignage: DataSVG = {
   group: "m5",
-
+  title: "digitalsignage",
   text: ["Digital", "Signage"],
   viewBox: "0 0 500 380",
   detail: [
@@ -190,7 +190,7 @@ export const DigitalSignage: DataSVG = {
 
 export const ConferenceRooms: DataSVG = {
   group: "m5",
-
+  title: "conferencerooms",
   text: ["Conference", "Rooms"],
   viewBox: "0 0 452 392",
   detail: [
@@ -203,7 +203,7 @@ export const ConferenceRooms: DataSVG = {
 
 export const WorkSpace: DataSVG = {
   group: "m5",
-
+  title: "workspace",
   text: ["Workspace", "Reservation"],
   viewBox: "0 0 440 380",
   detail: [
@@ -216,7 +216,7 @@ export const WorkSpace: DataSVG = {
 
 export const ContactCenter: DataSVG = {
   group: "m5",
-
+  title: "contactcenter",
   text: ["Contact Center"],
   viewBox: "0 0 453 423",
   detail: [
@@ -229,7 +229,7 @@ export const ContactCenter: DataSVG = {
 
 export const zoomText: DataSVG = {
   group: "m3",
-
+  title: "zoomtext",
   viewBox: "0 0 400 100",
   detail: [
     {
@@ -240,6 +240,7 @@ export const zoomText: DataSVG = {
 };
 
 export const me: DataSVG = {
+  title: "me",
   viewBox: "0 0 197 401",
   detail: [
     {
@@ -253,6 +254,7 @@ export const me: DataSVG = {
   ],
 };
 export const plant: DataSVG = {
+  title: "plant",
   viewBox: "0 0 165 211",
   detail: [
     {
@@ -274,6 +276,7 @@ export const plant: DataSVG = {
   ],
 };
 export const belongings: DataSVG = {
+  title: "belongings",
   // viewBox: "0 0 112 226",
   viewBox: "0 0 197 401",
   detail: [
@@ -289,6 +292,7 @@ export const belongings: DataSVG = {
 };
 
 export const JavaScript: DataSVG = {
+  title: "javascript",
   viewBox: "0 0 448 448",
   detail: [
     {
@@ -303,6 +307,7 @@ export const JavaScript: DataSVG = {
 };
 
 export const TypeScript: DataSVG = {
+  title: "typescript",
   viewBox: "0 0 512 512",
   detail: [
     {
@@ -317,6 +322,7 @@ export const TypeScript: DataSVG = {
 };
 
 export const SaSS: DataSVG = {
+  title: "sass",
   viewBox: "0 0 640 481",
   detail: [
     {
@@ -331,6 +337,7 @@ export const SaSS: DataSVG = {
 };
 
 export const Webpack: DataSVG = {
+  title: "webpack",
   viewBox: "0 0 398 450",
   detail: [
     {
@@ -354,6 +361,7 @@ export const Webpack: DataSVG = {
 };
 
 export const html5: DataSVG = {
+  title: "html5",
   viewBox: "0 0 384 448",
   detail: [
     {
@@ -376,6 +384,7 @@ export const html5: DataSVG = {
 };
 
 export const NodeJS: DataSVG = {
+  title: "nodejs",
   viewBox: "0 0 640 392",
   detail: [
     {
@@ -394,6 +403,7 @@ export const NodeJS: DataSVG = {
 };
 
 export const Css: DataSVG = {
+  title: "css",
   viewBox: "0 0 384 448",
   detail: [
     {
@@ -416,6 +426,7 @@ export const Css: DataSVG = {
 };
 
 export const python: DataSVG = {
+  title: "python",
   viewBox: "0 0 449 449",
   detail: [
     {
@@ -434,6 +445,7 @@ export const python: DataSVG = {
 };
 
 export const Clang: DataSVG = {
+  title: "clang",
   viewBox: "0 0 380 420",
   detail: [
     {
@@ -456,6 +468,7 @@ export const Clang: DataSVG = {
 };
 
 export const TailwindCSS: DataSVG = {
+  title: "tailwindcss",
   viewBox: "0 0 500 300",
   detail: [
     {
@@ -470,6 +483,7 @@ export const TailwindCSS: DataSVG = {
 };
 
 export const vsCode: DataSVG = {
+  title: "vscode",
   viewBox: " 0 234 235.1",
   detail: [
     {
@@ -484,6 +498,7 @@ export const vsCode: DataSVG = {
 };
 
 export const PostCSS: DataSVG = {
+  title: "postcss",
   viewBox: "0 0 79 78",
   detail: [
     { fill: "#2F2E41", path: "" },
@@ -496,6 +511,7 @@ export const PostCSS: DataSVG = {
 };
 
 export const git: DataSVG = {
+  title: "git",
   viewBox: "0 0 449 448",
   detail: [
     {
@@ -522,6 +538,7 @@ export const git: DataSVG = {
 };
 
 export const JavjjaScript: DataSVG = {
+  title: "",
   viewBox: "0 0 197 401",
   detail: [
     {

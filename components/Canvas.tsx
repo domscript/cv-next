@@ -3,8 +3,9 @@ import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
 import room from "../utils/room";
 import wheel from "../utils/wheel";
+import header from "../utils/header";
 
-interface CanvasProps {
+export interface CanvasProps {
   children: React.ReactNode;
   className: string;
   width: number;
@@ -28,6 +29,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         break;
       case "wheel":
         wheel(canvas, context, props.data);
+        break;
+      case "header":
+        header(canvas, context, props.data);
         break;
       default:
         break;

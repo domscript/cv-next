@@ -66,7 +66,7 @@ export default function Home() {
     ContactCenter,
   ];
   const roomSVG = [me, plant, belongings];
-
+  const dataMain = [...dataSVGlang];
   return (
     <>
       <Head>
@@ -77,6 +77,25 @@ export default function Home() {
 
       <main className={styles.main}>
         <ul className={styles.grid}>
+          <li className={styles.card}>
+            <Canvas width={500} height={200} className="header" data={dataMain}>
+              <section className="myButtons">
+                {dataMain.map((el) => {
+                  const text = el.title.toLowerCase();
+                  return (
+                    <button
+                      key={text}
+                      className="btn"
+                      type="button"
+                      data-sort={text}
+                    >
+                      {text}
+                    </button>
+                  );
+                })}
+              </section>
+            </Canvas>
+          </li>
           <li className={styles.card}>
             <Canvas
               width={500}

@@ -6,8 +6,6 @@
 .main {
   min-height: 100vh;
   width: 100%;
-
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -54,7 +52,6 @@
 }
 
 .description {
-  margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
