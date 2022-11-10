@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Canvas from "../components/Canvas";
+import Footer from "../components/Footer";
 import {
   html5,
   JavaScript,
@@ -34,7 +35,7 @@ import {
   WorkSpace,
   ContactCenter,
 } from "../utils/pathsSVG";
-
+import { me, plant, belongings } from "../utils/pathsSVG";
 export default function Home() {
   const dataSVGlang = [
     html5,
@@ -64,6 +65,7 @@ export default function Home() {
     WorkSpace,
     ContactCenter,
   ];
+  const roomSVG = [me, plant, belongings];
 
   return (
     <>
@@ -74,15 +76,6 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
         <ul className={styles.grid}>
           <li className={styles.card}>
             <Canvas
@@ -112,12 +105,7 @@ export default function Home() {
           </li>
 
           <li className={styles.card}>
-            <Canvas
-              width={500}
-              height={500}
-              className="room"
-              data={dataSVGlang}
-            >
+            <Canvas width={500} height={500} className="room" data={roomSVG}>
               <section className="myButtons">
                 <button className="btn" type="button" data-sort="bubble">
                   BS
@@ -212,19 +200,7 @@ export default function Home() {
           </li>
         </ul>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <Footer />
     </>
   );
 }

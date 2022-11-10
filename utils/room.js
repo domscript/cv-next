@@ -1,4 +1,5 @@
 import { Button } from "./button.js";
+import { Me } from "./me.js";
 
 export default function sort(canvas, context, data = []) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
@@ -23,5 +24,35 @@ export default function sort(canvas, context, data = []) {
   img.src = "image/room2.svg";
   img.onload = () => {
     context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    data[0].coords = {
+      x: 200,
+      y: 255,
+      zoom: 1,
+    };
+    data[1].coords = {
+      x: 390,
+      y: 42,
+      zoom: 0.5,
+    };
+    data[2].coords = {
+      x: 210,
+      y: 290,
+      zoom: 1,
+    };
+
+    const coords = {
+      x: 50,
+      y: 50,
+      canvasW: canvas.width / 8,
+      canvasH: canvas.height / 8,
+    };
+
+    const homeObjects = [];
+
+    for (let i = 0; i < 1; i++) {
+      const [x, y] = [0, 0];
+      homeObjects[i] = new Me(x, y, 100, 100, data);
+      homeObjects[i].draw(context, coords);
+    }
   };
 }
