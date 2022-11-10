@@ -1,41 +1,23 @@
 import { Sector } from "./sector.js";
-
-import {
-  Events,
-  Apps,
-  Phone,
-  Video,
-  Webinars,
-  TeamChat,
-  MarketPlace,
-  Solvvy,
-  Whiteboard,
-  Api,
-  ZoomOI,
-  DigitalSignage,
-  ConferenceRooms,
-  WorkSpace,
-  ContactCenter,
-} from "./pathsSVG";
-
 export default function sort(canvas, context, data = []) {
+  const newData = [...new Set(data.map((el, i, arr) => el.group))];
+  const cardsSrc = newData.map((el) => ({ group: el, lines: [] }));
+  data.forEach((el, i) => {
+    cardsSrc.forEach(
+      (k) =>
+        k.group === el.group &&
+        k.lines.push({
+          viewBox: data[i].viewBox,
+          detail: [...data[i].detail],
+          text: [...data[i].text],
+        })
+    );
+  });
   const margin = 10;
-  const cardsSrc = [
-    {
-      group: "mOne",
-      lines: [Phone],
-    },
-    {
-      group: "mAI",
-      lines: [ZoomOI],
-    },
-    { group: "mD", lines: [MarketPlace] },
-    { group: "mCC", lines: [ContactCenter, Solvvy] },
-    { group: "mZC", lines: [WorkSpace, ConferenceRooms, DigitalSignage] },
-  ];
   const angleStart = 200;
   const [inner, outer] = [40, 15];
-
+  const rectWidth =
+    (1 - (1 - (inner + outer) / 100) * Math.cos(Math.PI / 4)) / 2;
   function defineAngles(cardsSrc, angleStart) {
     const cards = cardsSrc.map((el) => el.lines.length);
     const sum = cards.reduce((acc, el) => {
@@ -108,7 +90,7 @@ export default function sort(canvas, context, data = []) {
       coords.canvasH = clickCoords.canvasH;
       timer = setTimeout(() => {
         [coords.x, coords.y] = [0, 0];
-      }, 5000);
+      }, 200);
 
       context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -140,7 +122,20 @@ export default function sort(canvas, context, data = []) {
   animate();
 
   function animate() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width * rectWidth, canvas.height);
+    context.clearRect(
+      canvas.width * (1 - rectWidth),
+      0,
+      canvas.width,
+      canvas.height
+    );
+    context.clearRect(0, 0, canvas.width, canvas.height * rectWidth);
+    context.clearRect(
+      0,
+      canvas.height * (1 - rectWidth),
+      canvas.width,
+      canvas.height
+    );
     for (let i = 0; i < sectors.length; i++) {
       sectors[i].draw(context, colors[i], coords);
       sectors[i].rotateTo(sectors[i]);
