@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -34,9 +35,14 @@ import {
   ConferenceRooms,
   WorkSpace,
   ContactCenter,
+  wheell,
+  sorrt,
 } from "../utils/pathsSVG";
 import { me, plant, belongings } from "../utils/pathsSVG";
+
 export default function Home() {
+  const [buttonClicked1, setButtonClicked1] = useState("lang"); // tool
+
   const dataSVGlang = [
     html5,
     SaSS,
@@ -47,7 +53,9 @@ export default function Home() {
     TypeScript,
     JavaScript,
   ];
-  const dataSVG = [Webpack, NodeJS, TailwindCSS, vsCode, git];
+  const dataSVGtool = [Webpack, NodeJS, TailwindCSS, vsCode, git];
+  let dataSVG = [...dataSVGlang];
+
   const skillsSVG = [
     Events,
     Apps,
@@ -66,7 +74,44 @@ export default function Home() {
     ContactCenter,
   ];
   const roomSVG = [me, plant, belongings];
-  const dataMain = [...dataSVGlang];
+  const dataMain = [
+    JavaScript,
+    NodeJS,
+    JavaScript,
+    NodeJS,
+    JavaScript,
+    NodeJS,
+    JavaScript,
+    NodeJS,
+  ];
+
+  function buttonDataHandler(buttonClick: string): void {
+    setButtonClicked1(buttonClick);
+  }
+
+  const wheelCanvas = (
+    <li className={styles.card}>
+      <Canvas
+        width={500}
+        height={500}
+        className="wheel"
+        data={skillsSVG}
+        onChangeData={buttonDataHandler}
+      >
+        <section className="myButtons">
+          {skillsSVG.map((el) => {
+            const text = el.title.toLowerCase();
+            return (
+              <button key={text} className="btn" type="button" data-sort={text}>
+                {text}
+              </button>
+            );
+          })}
+        </section>
+      </Canvas>
+    </li>
+  );
+
   return (
     <>
       <Head>
@@ -78,16 +123,23 @@ export default function Home() {
       <main className={styles.main}>
         <ul className={styles.grid}>
           <li className={styles.card}>
-            <Canvas width={500} height={200} className="header" data={dataMain}>
+            <Canvas
+              width={500}
+              height={200}
+              className="header"
+              data={dataMain}
+              onChangeData={buttonDataHandler}
+            >
               <section className="myButtons">
                 {dataMain.map((el) => {
                   const text = el.title.toLowerCase();
+                  const group = el.group.toLowerCase();
                   return (
                     <button
-                      key={text}
+                      key={text + Math.random()}
                       className="btn"
                       type="button"
-                      data-sort={text}
+                      data-sort={group}
                     >
                       {text}
                     </button>
@@ -101,7 +153,8 @@ export default function Home() {
               width={500}
               height={500}
               className="sort"
-              data={dataSVGlang}
+              data={buttonClicked1 === "lang" ? dataSVGlang : dataSVGtool}
+              onChangeData={buttonDataHandler}
             >
               <section className="myButtons">
                 <button className="btn" type="button" data-sort="bubble">
@@ -124,9 +177,15 @@ export default function Home() {
           </li>
 
           <li className={styles.card}>
-            <Canvas width={500} height={500} className="room" data={roomSVG}>
+            <Canvas
+              width={500}
+              height={500}
+              className="room"
+              data={roomSVG}
+              onChangeData={buttonDataHandler}
+            >
               <section className="myButtons">
-                <button className="btn" type="button" data-sort="bubble">
+                {/* <button className="btn" type="button" data-sort="bubble">
                   BS
                 </button>
                 <button className="btn" type="button" data-sort="bubbleBack">
@@ -140,83 +199,38 @@ export default function Home() {
                 </button>
                 <button className="btn" type="button" data-sort="insertion">
                   IS
-                </button>
+                </button> */}
               </section>
-            </Canvas>{" "}
-          </li>
-
-          <li className={styles.card}>
-            <Canvas width={500} height={500} className="wheel" data={skillsSVG}>
-              <section className="myButtons">
-                <button className="btn" type="button" data-sort="bubble">
-                  BS
-                </button>
-                <button className="btn" type="button" data-sort="bubbleBack">
-                  BSB
-                </button>
-                <button className="btn" type="button" data-sort="selection">
-                  SS
-                </button>
-                <button className="btn" type="button" data-sort="selectionBack">
-                  SSB
-                </button>
-                <button className="btn" type="button" data-sort="insertion">
-                  IS
-                </button>
-              </section>
-            </Canvas>{" "}
-          </li>
-          <li className={styles.card}>
-            <Canvas width={500} height={500} className="sort" data={dataSVG}>
-              <section className="myButtons">
-                <button className="btn" type="button" data-sort="bubble">
-                  BS
-                </button>
-                <button className="btn" type="button" data-sort="bubbleBack">
-                  BSB
-                </button>
-                <button className="btn" type="button" data-sort="selection">
-                  SS
-                </button>
-                <button className="btn" type="button" data-sort="selectionBack">
-                  SSB
-                </button>
-                <button className="btn" type="button" data-sort="insertion">
-                  IS
-                </button>
-              </section>
-              {/* <section className="myRange">
-                <ul>
-                  <li>
-                    <label htmlFor="speed">Speed</label>
-                    <br />
-                    <input
-                      type="range"
-                      name="speed"
-                      id="speed"
-                      defaultValue="3"
-                      min="1"
-                      max="5"
-                      // onChange={setSpeed()}
-                    />
-                  </li>
-                  <li>
-                    <label htmlFor="amount">Amount</label>
-                    <br />
-                    <input
-                      type="range"
-                      name="amount"
-                      id="amount"
-                      defaultValue="15"
-                      min="3"
-                      max="100"
-                      // onChange="setAmount()"
-                    />
-                  </li>
-                </ul>
-              </section> */}
             </Canvas>
           </li>
+          {wheelCanvas}
+          {/* <li className={styles.card}>
+            <Canvas
+              width={500}
+              height={500}
+              className="sort"
+              data={dataSVG}
+              onChangeData={buttonDataHandler}
+            >
+              <section className="myButtons">
+                <button className="btn" type="button" data-sort="bubble">
+                  BS
+                </button>
+                <button className="btn" type="button" data-sort="bubbleBack">
+                  BSB
+                </button>
+                <button className="btn" type="button" data-sort="selection">
+                  SS
+                </button>
+                <button className="btn" type="button" data-sort="selectionBack">
+                  SSB
+                </button>
+                <button className="btn" type="button" data-sort="insertion">
+                  IS
+                </button>
+              </section>
+            </Canvas>
+          </li> */}
         </ul>
       </main>
       <Footer />

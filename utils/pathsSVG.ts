@@ -6,7 +6,7 @@ interface DataSVG {
   }[];
   title: string;
   text?: string[];
-  group?: string;
+  group: string;
 }
 
 export default DataSVG;
@@ -240,6 +240,7 @@ export const zoomText: DataSVG = {
 };
 
 export const me: DataSVG = {
+  group: "room",
   title: "me",
   viewBox: "0 0 197 401",
   detail: [
@@ -254,6 +255,7 @@ export const me: DataSVG = {
   ],
 };
 export const plant: DataSVG = {
+  group: "room",
   title: "plant",
   viewBox: "0 0 165 211",
   detail: [
@@ -276,6 +278,7 @@ export const plant: DataSVG = {
   ],
 };
 export const belongings: DataSVG = {
+  group: "room",
   title: "belongings",
   // viewBox: "0 0 112 226",
   viewBox: "0 0 197 401",
@@ -293,6 +296,7 @@ export const belongings: DataSVG = {
 
 export const JavaScript: DataSVG = {
   title: "javascript",
+  group: "lang",
   viewBox: "0 0 448 448",
   detail: [
     {
@@ -308,6 +312,7 @@ export const JavaScript: DataSVG = {
 
 export const TypeScript: DataSVG = {
   title: "typescript",
+  group: "lang",
   viewBox: "0 0 512 512",
   detail: [
     {
@@ -323,6 +328,7 @@ export const TypeScript: DataSVG = {
 
 export const SaSS: DataSVG = {
   title: "sass",
+  group: "lang",
   viewBox: "0 0 640 481",
   detail: [
     {
@@ -337,6 +343,7 @@ export const SaSS: DataSVG = {
 };
 
 export const Webpack: DataSVG = {
+  group: "tool",
   title: "webpack",
   viewBox: "0 0 398 450",
   detail: [
@@ -361,6 +368,7 @@ export const Webpack: DataSVG = {
 };
 
 export const html5: DataSVG = {
+  group: "lang",
   title: "html5",
   viewBox: "0 0 384 448",
   detail: [
@@ -384,6 +392,7 @@ export const html5: DataSVG = {
 };
 
 export const NodeJS: DataSVG = {
+  group: "tool",
   title: "nodejs",
   viewBox: "0 0 640 392",
   detail: [
@@ -403,6 +412,7 @@ export const NodeJS: DataSVG = {
 };
 
 export const Css: DataSVG = {
+  group: "lang",
   title: "css",
   viewBox: "0 0 384 448",
   detail: [
@@ -426,6 +436,7 @@ export const Css: DataSVG = {
 };
 
 export const python: DataSVG = {
+  group: "lang",
   title: "python",
   viewBox: "0 0 449 449",
   detail: [
@@ -445,6 +456,7 @@ export const python: DataSVG = {
 };
 
 export const Clang: DataSVG = {
+  group: "lang",
   title: "clang",
   viewBox: "0 0 380 420",
   detail: [
@@ -468,6 +480,7 @@ export const Clang: DataSVG = {
 };
 
 export const TailwindCSS: DataSVG = {
+  group: "tool",
   title: "tailwindcss",
   viewBox: "0 0 500 300",
   detail: [
@@ -483,6 +496,7 @@ export const TailwindCSS: DataSVG = {
 };
 
 export const vsCode: DataSVG = {
+  group: "tool",
   title: "vscode",
   viewBox: " 0 234 235.1",
   detail: [
@@ -499,6 +513,7 @@ export const vsCode: DataSVG = {
 
 export const PostCSS: DataSVG = {
   title: "postcss",
+  group: "lang",
   viewBox: "0 0 79 78",
   detail: [
     { fill: "#2F2E41", path: "" },
@@ -510,7 +525,51 @@ export const PostCSS: DataSVG = {
   ],
 };
 
+export const wheell: DataSVG = {
+  group: "window",
+  title: "wheel",
+  viewBox: "0 0 449 448",
+  detail: [
+    {
+      fill: "#2F2E41",
+      path: "",
+    },
+    {
+      fill: "#FF8080",
+      path: "M335.298 99.7669L244.001 8.44666C238.587 3.03809 231.248 0 223.596 0C215.943 0 208.604 3.03809 203.191 8.44666L162.531 49.0767L214.051 100.597C241.111 91.4567 266.731 117.367 257.441 144.277L274.114 160.95L335.298 99.7669Z M240.221 194.844L254.153 180.911L240.221 166.997V194.844Z M111.796 99.7756L212.001 199.98V164.847C191.201 156.337 187.401 134.107 193.361 119.847L142.571 68.9966L111.796 99.7756Z",
+    },
+    {
+      fill: "#80B3FF",
+      path: "M190.309 202.329C202.024 214.045 202.024 233.04 190.309 244.756L99.7867 335.278L8.45081 243.947C3.03979 238.535 0 231.195 0 223.542C0 215.889 3.03979 208.549 8.45081 203.137L99.7765 111.797L190.309 202.329Z",
+    },
+    {
+      fill: "#8DD35F",
+      path: "M347.317 111.789L286.135 172.971L307.101 193.937C341.331 182.137 368.281 224.937 342.571 250.627C316.081 277.117 272.361 247.757 286.571 213.287L266.182 192.924L257.717 202.908C247.775 214.632 248.304 231.974 258.942 243.07L348.214 336.193L439.551 244.857C444.962 239.445 448.002 232.105 448.002 224.452C448.002 216.799 444.962 209.459 439.551 204.047L347.317 111.789Z",
+    },
+    {
+      fill: "#FFE680",
+      path: "M111.808 347.298L212.001 247.105V287.847C189.681 296.937 183.181 326.247 200.751 343.847C207.19 350.282 215.922 353.898 225.026 353.898C234.13 353.898 242.861 350.282 249.301 343.847C262.481 330.697 265.521 301.387 240.221 288.847V252.242L336.193 348.214L244.861 439.547C239.449 444.955 232.111 447.992 224.461 447.992C216.81 447.992 209.473 444.955 204.061 439.547L111.808 347.298Z",
+    },
+  ],
+};
+export const sorrt: DataSVG = {
+  group: "window",
+  title: "sort",
+  viewBox: " 0 234 235.1",
+  detail: [
+    {
+      fill: "#2F2E41",
+      path: "",
+    },
+    {
+      fill: "#0179cb",
+      path: "M83.3 143.9l-58 45.2L0 176.5V58.7L25.2 46l57.6 45.3L174 0l60 23.9v186.9l-59.7 24.3-91-91.2zm88.9 15.9V75.3l-54.6 42.3 54.6 42.2zM27.3 144.6L56 118.5 27.3 89.9v54.7z",
+    },
+  ],
+};
+
 export const git: DataSVG = {
+  group: "tool",
   title: "git",
   viewBox: "0 0 449 448",
   detail: [
@@ -538,6 +597,7 @@ export const git: DataSVG = {
 };
 
 export const JavjjaScript: DataSVG = {
+  group: "tool",
   title: "",
   viewBox: "0 0 197 401",
   detail: [

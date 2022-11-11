@@ -1,5 +1,7 @@
-export function selectionSort(array) {
-  const moves = [];
+import { Moves } from "../sort";
+
+export function selectionSort(array: number[]): Moves[] {
+  const moves: Moves[] = [];
   do {
     var swapped = false;
     for (let i = 0; i < array.length - 1; i++) {

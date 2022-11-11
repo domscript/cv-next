@@ -1,4 +1,4 @@
-import { lerp } from "./math.js";
+import { lerp } from "./math";
 
 export class Column {
   constructor(x, y, width, height, data) {

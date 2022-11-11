@@ -1,16 +1,25 @@
-import { lerp } from "./math.js";
-
+import { lerp } from "./math";
+import { cardsSrcInt } from "./wheel";
 export class Sector {
+  x: number;
+  y: number;
+  radius: number;
+  inner = 30;
+  outer = 10;
+  angleStart = 0;
+  angle = 180;
+  icons = 1;
+  cardsSrc: cardsSrcInt;
   constructor(
-    x,
-    y,
-    radius,
+    x: number,
+    y: number,
+    radius: number,
     inner = 30,
     outer = 10,
     angleStart = 0,
     angle = 180,
     icons = 1,
-    cardsSrc
+    cardsSrc: cardsSrcInt
   ) {
     // inner %, outer %, angle deg
     this.x = x;
@@ -24,7 +33,7 @@ export class Sector {
     this.cardsSrc = cardsSrc;
   }
 
-  rotateTo(sector, frameCount = 10) {
+  rotateTo(sector: Sector, frameCount = 10) {
     // frameCount always should be Int round Up
     // it makes this func independent from outside
     const deg = (1 / 180) * Math.PI;
@@ -35,7 +44,16 @@ export class Sector {
     }
   }
 
-  draw(context, color, coords) {
+  draw(
+    context: CanvasRenderingContext2D,
+    color: [string, string, string, string],
+    coords: {
+      x: number;
+      y: number;
+      canvasW: number;
+      canvasH: number;
+    }
+  ) {
     const angleS = this.angleStart;
     const angleE = this.angle;
     const cosS = Math.cos(angleS);
@@ -121,7 +139,10 @@ export class Sector {
       const iconsY = Math.sin(angDDD) * radiusIcons;
       context.fillStyle = color[0];
       const sizeXY = this.cardsSrc.lines[i - 1].viewBox.split(" ");
-      const [sizeX, sizeY] = [sizeXY[2] - sizeXY[0], sizeXY[3] - sizeXY[1]];
+      const [sizeX, sizeY] = [
+        Number(sizeXY[2]) - Number(sizeXY[0]),
+        Number(sizeXY[3]) - Number(sizeXY[1]),
+      ];
 
       const size = (Math.max(sizeX, sizeY) / (radiusOuter - radiusInner)) * 3;
 

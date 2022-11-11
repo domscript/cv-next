@@ -1,5 +1,7 @@
-export function selectionSortBack(array) {
-  const moves = [];
+import { Moves } from "../sort";
+
+export function selectionSortBack(array: number[]): Moves[] {
+  const moves: Moves[] = [];
   do {
     var swapped = false;
     for (let i = array.length - 1; i >= 0; i--) {

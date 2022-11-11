@@ -1,8 +1,10 @@
-export function bubbleSort(array) {
-  const moves = [];
+import { Moves } from "../sort";
+
+export function bubbleSortBack(array: number[]): Moves[] {
+  const moves: Moves[] = [];
   do {
     var swapped = false;
-    for (let i = 1; i < array.length; i++) {
+    for (let i = array.length - 1; i >= 0; i--) {
       if (array[i - 1] > array[i]) {
         swapped = true;
         [array[i - 1], array[i]] = [array[i], array[i - 1]];

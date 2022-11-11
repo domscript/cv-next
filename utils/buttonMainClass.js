@@ -1,4 +1,4 @@
-import { lerp } from "./math.js";
+import { lerp } from "./math";
 
 export class buttonMainClass {
   constructor(x, y, width, height, data, el) {

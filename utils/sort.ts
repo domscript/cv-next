@@ -1,16 +1,26 @@
 import { Column } from "./column.js";
 import { Button } from "./button.js";
-import { bubbleSort } from "./algorithms/bubbleSort.js";
-import { bubbleSortBack } from "./algorithms/bubbleSortBack.js";
-import { selectionSort } from "./algorithms/selectionSort.js";
-import { selectionSortBack } from "./algorithms/selectionSortBack.js";
-import { insertionSort } from "./algorithms/insertionSort.js";
+import { bubbleSort } from "./algorithms/bubbleSort";
+import { bubbleSortBack } from "./algorithms/bubbleSortBack";
+import { selectionSort } from "./algorithms/selectionSort";
+import { selectionSortBack } from "./algorithms/selectionSortBack";
+import { insertionSort } from "./algorithms/insertionSort";
+import { CanvasProps } from "../components/Canvas";
 
-export default function sort(canvas, context, data = []) {
+export interface Moves {
+  indices: [number, number];
+  swap: boolean;
+}
+
+export default function sort(
+  canvas: HTMLCanvasElement,
+  context: CanvasRenderingContext2D,
+  data: CanvasProps["data"] = []
+) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
   const margin = 30;
   const buttonsGap = 8;
-  const buttons = [];
+  const buttons: Button[] = [];
   const buttonsNum = myButtons.children.length;
   const buttonSpacing = (canvas.width - margin * 2) / buttonsNum;
 
@@ -26,9 +36,9 @@ export default function sort(canvas, context, data = []) {
   let amount = data.length;
   // let speed;
   const maxColumnHeight = canvas.height * 0.5;
-  let array = [];
-  let cols = [];
-  let moves = [];
+  let array: number[] = [];
+  let cols: Column[] = [];
+  let moves: Moves[];
   function init() {
     array = [];
     cols = [];
@@ -42,7 +52,6 @@ export default function sort(canvas, context, data = []) {
     for (let i = 0; i < amount; i++) {
       array[i] = Math.random() * 0.8 + 0.2;
     }
-    moves = [];
     for (let i = 0; i < array.length; i++) {
       const x = i * spacing + spacing / 2 + margin;
       const y = canvas.height * 0.8 - margin - i * grow;
@@ -53,7 +62,7 @@ export default function sort(canvas, context, data = []) {
   }
   init();
 
-  canvas.addEventListener("click", (e) => {
+  canvas.addEventListener("pointerdown", (e: PointerEvent) => {
     switch (handleClick(e)) {
       case "bubble":
         bubble();
@@ -73,18 +82,16 @@ export default function sort(canvas, context, data = []) {
     }
   });
 
-  function handleClick(e) {
+  function handleClick(e: PointerEvent) {
     let sort;
     // Calculate click coordinates
     const { height, width, top } = canvas.getBoundingClientRect();
     const x = e.clientX - canvas.offsetLeft;
     const y = e.clientY - top;
-    const canvasW = e.target.clientWidth;
-    const canvasH = e.target.clientHeight;
 
     // Focus button1, if appropriate
     for (let j = 0; j < buttons.length; j++) {
-      buttons[j].draw(context, myButtons.children[j]);
+      buttons[j].draw(context);
       if (context.isPointInPath(x, y)) {
         sort = buttons[j].el.dataset.sort;
       }
@@ -128,43 +135,45 @@ export default function sort(canvas, context, data = []) {
     let frameCount;
 
     for (let j = 0; j < buttons.length; j++) {
-      buttons[j].draw(context, myButtons.children[j]);
+      buttons[j].draw(context);
     }
 
     for (let i = 0; i < cols.length; i++) {
       changed = cols[i].draw(context) || changed;
     }
 
-    if (!changed && moves.length > 0) {
+    if (!changed && moves?.length > 0) {
       const move = moves.shift();
-      const [i, j] = move.indices;
-      if (move.swap) {
-        // switch (speed) {
-        //   case "1":
-        //     frameCount = 100;
-        //     break;
-        //   case "2":
-        //     frameCount = 50;
-        //     break;
-        //   case "3":
-        //     frameCount = 20;
-        //     break;
-        //   case "4":
-        //     frameCount = 10;
-        //     break;
-        //   case "5":
-        //     frameCount = 1;
-        //     break;
-        //   default:
-        //     frameCount = 25;
-        //     break;
-        // }
+      if (move) {
+        const [i, j] = move.indices;
+        if (move.swap) {
+          // switch (speed) {
+          //   case "1":
+          //     frameCount = 100;
+          //     break;
+          //   case "2":
+          //     frameCount = 50;
+          //     break;
+          //   case "3":
+          //     frameCount = 20;
+          //     break;
+          //   case "4":
+          //     frameCount = 10;
+          //     break;
+          //   case "5":
+          //     frameCount = 1;
+          //     break;
+          //   default:
+          //     frameCount = 25;
+          //     break;
+          // }
 
-        cols[i].moveTo(cols[j], 1, frameCount);
-        cols[j].moveTo(cols[i], -1, frameCount);
-        [cols[i], cols[j]] = [cols[j], cols[i]];
-      } else {
-        // todo
+          cols[i].moveTo(cols[j], 1, frameCount);
+          cols[j].moveTo(cols[i], -1, frameCount);
+          [cols[i], cols[j]] = [cols[j], cols[i]];
+        } else {
+          // todo
+        }
       }
     }
     requestAnimationFrame(animate);

@@ -1,5 +1,6 @@
 import { buttonMainClass } from "./buttonMainClass.js";
 import { CanvasProps } from "../components/Canvas";
+
 export default function header(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
@@ -26,9 +27,10 @@ export default function header(
     buttons[i] = new buttonMainClass(x, y, width, height, data[i], el);
     buttons[i].draw(context);
   }
-
+  let buttonData: string = "";
   canvas.addEventListener("pointerdown", (e: PointerEvent) => {
-    console.log(handleClick(e));
+    buttonData = handleClick(e);
+    console.log(buttonData);
   });
 
   function handleClick(e: PointerEvent) {
@@ -48,6 +50,8 @@ export default function header(
     }
     return sort;
   }
+  console.log(buttonData);
+  return buttonData;
 
   // animate();
 

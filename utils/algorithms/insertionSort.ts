@@ -1,5 +1,7 @@
-export function insertionSort(array) {
-  const moves = [];
+import { Moves } from "../sort";
+
+export function insertionSort(array: number[]): Moves[] {
+  const moves: Moves[] = [];
   for (let i = 1; i < array.length; i++) {
     let [key, j] = [array[i], i - 1];
 
