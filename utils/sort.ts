@@ -1,11 +1,12 @@
-import { Column } from "./column.js";
-import { Button } from "./button.js";
+import { Column } from "./column";
+import { Button } from "./button";
 import { bubbleSort } from "./algorithms/bubbleSort";
 import { bubbleSortBack } from "./algorithms/bubbleSortBack";
 import { selectionSort } from "./algorithms/selectionSort";
 import { selectionSortBack } from "./algorithms/selectionSortBack";
 import { insertionSort } from "./algorithms/insertionSort";
 import { CanvasProps } from "../components/Canvas";
+import DataSVG from "./pathsSVG";
 
 export interface Moves {
   indices: [number, number];
@@ -25,7 +26,7 @@ export default function sort(
   const buttonSpacing = (canvas.width - margin * 2) / buttonsNum;
 
   for (let j = 0; j < buttonsNum; j++) {
-    const el = myButtons.children[j];
+    const el = myButtons.children[j] as HTMLElement;
     const x = j * buttonSpacing + buttonSpacing / 2 + margin;
     const y = canvas.height - margin;
     const width = buttonSpacing - buttonsGap;
@@ -57,7 +58,8 @@ export default function sort(
       const y = canvas.height * 0.8 - margin - i * grow;
       const width = spacing - gap;
       const height = maxColumnHeight * array[i];
-      cols[i] = new Column(x, y, width, height, data[i]);
+      const colsData = data[i];
+      cols[i] = new Column(x, y, width, height, colsData);
     }
   }
   init();

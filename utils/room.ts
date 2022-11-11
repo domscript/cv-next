@@ -1,7 +1,12 @@
-import { Button } from "./button.js";
-import { Me } from "./me.js";
+import { Button } from "./button";
+import { coordsDataSVG, Me } from "./me";
+import { CanvasProps } from "../components/Canvas";
 
-export default function sort(canvas, context, data = []) {
+export default function sort(
+  canvas: HTMLCanvasElement,
+  context: CanvasRenderingContext2D,
+  data: coordsDataSVG[] = []
+) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
   const margin = 30;
   const buttonsGap = 8;
@@ -10,7 +15,7 @@ export default function sort(canvas, context, data = []) {
   const buttonSpacing = (canvas.width - margin * 2) / buttonsNum;
 
   for (let j = 0; j < buttonsNum; j++) {
-    const el = myButtons.children[j];
+    const el = myButtons.children[j] as HTMLElement;
     const x = j * buttonSpacing + buttonSpacing / 2 + margin;
     const y = canvas.height - margin;
     const width = buttonSpacing - buttonsGap;
@@ -24,6 +29,7 @@ export default function sort(canvas, context, data = []) {
   img.src = "image/room2.svg";
   img.onload = () => {
     context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
     data[0].coords = {
       x: 200,
       y: 255,
@@ -40,7 +46,12 @@ export default function sort(canvas, context, data = []) {
       zoom: 1,
     };
 
-    const coords = {
+    const coords: {
+      x: number;
+      y: number;
+      canvasW: number;
+      canvasH: number;
+    } = {
       x: 50,
       y: 50,
       canvasW: canvas.width / 8,

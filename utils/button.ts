@@ -1,5 +1,16 @@
 export class Button {
-  constructor(x, y, width, height, el) {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  el: HTMLElement;
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    el: HTMLElement
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -7,7 +18,7 @@ export class Button {
     this.el = el;
   }
 
-  draw(context) {
+  draw(context: CanvasRenderingContext2D) {
     const left = this.x - this.width / 2;
     const top = this.y - this.height;
     const right = this.x + this.width / 2;
@@ -21,11 +32,13 @@ export class Button {
     context.fillRect(left, top, width, height);
 
     // Button text
-    context.font = "15px sans-serif";
-    context.textAlign = "center";
-    context.textBaseline = "middle";
-    context.fillStyle = "black";
-    context.fillText(el.textContent, left + width / 2, top + height / 2);
+    if (el.textContent) {
+      context.font = "15px sans-serif";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillStyle = "black";
+      context.fillText(el.textContent, left + width / 2, top + height / 2);
+    }
 
     // Define clickable area
     context.beginPath();

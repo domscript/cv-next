@@ -1,5 +1,26 @@
+import DataSVG from "./pathsSVG";
+export interface coordsDataSVG extends DataSVG {
+  coords: {
+    x: number;
+    y: number;
+    canvasW?: number;
+    canvasH?: number;
+    zoom: number;
+  };
+}
 export class Me {
-  constructor(x, y, width, height, cardsSrc) {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  cardsSrc: coordsDataSVG[];
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    cardsSrc: coordsDataSVG[]
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -7,14 +28,25 @@ export class Me {
     this.cardsSrc = cardsSrc;
   }
 
-  draw(context, coords) {
+  draw(
+    context: CanvasRenderingContext2D,
+    coords: {
+      x: number;
+      y: number;
+      canvasW: number;
+      canvasH: number;
+    }
+  ) {
     const meX = coords.x;
     const meY = coords.y;
     const meWidht = coords.canvasW;
 
     for (let j = 0; j < this.cardsSrc.length; j++) {
       const sizeXY = this.cardsSrc[j].viewBox.split(" ");
-      const [sizeX, sizeY] = [sizeXY[2] - sizeXY[0], sizeXY[3] - sizeXY[1]];
+      const [sizeX, sizeY] = [
+        Number(sizeXY[2]) - Number(sizeXY[0]),
+        Number(sizeXY[3]) - Number(sizeXY[1]),
+      ];
       const size = (Math.max(sizeX, sizeY) / coords.canvasH) * 0.3;
       const meX = this.cardsSrc[j].coords.x;
       const meY = this.cardsSrc[j].coords.y;

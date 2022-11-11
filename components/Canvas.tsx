@@ -3,7 +3,7 @@ import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
 import room from "../utils/room";
 import wheel from "../utils/wheel";
-import { buttonMainClass } from "../utils/buttonMainClass.js";
+import { buttonMainClass } from "../utils/buttonMainClass";
 
 export interface CanvasProps {
   children: React.ReactNode;
@@ -57,7 +57,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
     for (let i = 0; i < amount; i++) {
       array[i] = buttonHeight;
-      const el = myButtons.children[i];
+      const el = myButtons.children[i] as HTMLElement;
       const x = i * spacing + spacing / 2 + margin;
       const y = canvas.height * 0.8 - margin;
       const width = spacing - gap;
@@ -79,7 +79,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       for (let j = 0; j < amount; j++) {
         buttons[j].draw(context);
         if (context.isPointInPath(x, y)) {
-          const sort = buttons[j].el.dataset.sort;
+          const sort = buttons[j].el.dataset.sort as string;
           props.onChangeData(sort);
           buttons[j].el.className = "btn active";
         }

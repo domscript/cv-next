@@ -1,7 +1,19 @@
-import { lerp } from "./math";
-
+import DataSVG from "./pathsSVG";
 export class buttonMainClass {
-  constructor(x, y, width, height, data, el) {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  data: DataSVG;
+  el: HTMLElement;
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    data: DataSVG,
+    el: HTMLElement
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -25,9 +37,8 @@ export class buttonMainClass {
   //   }
   // }
 
-  draw(context) {
+  draw(context: CanvasRenderingContext2D) {
     const data = this.data;
-
     let changed = false;
     // if (this.queue.length > 0) {
     //   const { x, y } = this.queue.shift();
@@ -62,7 +73,10 @@ export class buttonMainClass {
     context.drawFocusIfNeeded(el);
 
     const sizeXY = data.viewBox?.split(" ");
-    const [sizeX, sizeY] = [sizeXY[2] - sizeXY[0], sizeXY[3] - sizeXY[1]];
+    const [sizeX, sizeY] = [
+      Number(sizeXY[2]) - Number(sizeXY[0]),
+      Number(sizeXY[3]) - Number(sizeXY[1]),
+    ];
     const size = sizeX / width;
 
     const zoom = 0.99;

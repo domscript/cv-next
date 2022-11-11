@@ -1,7 +1,24 @@
 import { lerp } from "./math";
+import DataSVG from "./pathsSVG";
+interface Queue {
+  x: number;
+  y: number;
+}
 
 export class Column {
-  constructor(x, y, width, height, data) {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  data: DataSVG;
+  queue: Queue[];
+  constructor(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    data: DataSVG
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -10,7 +27,7 @@ export class Column {
     this.queue = [];
   }
 
-  moveTo(loc, yOffset = 1, frameCount = 20) {
+  moveTo(loc: Column, yOffset = 1, frameCount = 20) {
     // frameCount always should be Int round Up
     // it makes this func independent from outside
     frameCount = Math.ceil(frameCount);
@@ -24,12 +41,12 @@ export class Column {
     }
   }
 
-  draw(context) {
+  draw(context: CanvasRenderingContext2D) {
     const data = this.data;
 
     let changed = false;
     if (this.queue.length > 0) {
-      const { x, y } = this.queue.shift();
+      const { x, y } = this.queue.shift() as Queue;
       this.x = x;
       this.y = y;
       changed = true;
@@ -68,7 +85,10 @@ export class Column {
     context.stroke();
 
     const sizeXY = data.viewBox?.split(" ");
-    const [sizeX, sizeY] = [sizeXY[2] - sizeXY[0], sizeXY[3] - sizeXY[1]];
+    const [sizeX, sizeY] = [
+      Number(sizeXY[2]) - Number(sizeXY[0]),
+      Number(sizeXY[3]) - Number(sizeXY[1]),
+    ];
     const size = sizeX / width;
 
     const zoom = 0.99;
