@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Canvas from "../components/Canvas";
+import CanvasWheel from "../components/CanvasWheel";
 import Footer from "../components/Footer";
 import {
   html5,
@@ -77,12 +78,13 @@ export default function Home() {
   const dataMain = [
     JavaScript,
     NodeJS,
-    JavaScript,
-    NodeJS,
-    JavaScript,
-    NodeJS,
-    JavaScript,
-    NodeJS,
+    Css,
+    Webpack,
+    python,
+    vsCode,
+    Clang,
+    git,
+    TypeScript,
   ];
 
   function buttonDataHandler(buttonClick: string): void {
@@ -91,7 +93,7 @@ export default function Home() {
 
   const wheelCanvas = (
     <li className={styles.card}>
-      <Canvas
+      <CanvasWheel
         width={500}
         height={500}
         className="wheel"
@@ -108,7 +110,7 @@ export default function Home() {
             );
           })}
         </section>
-      </Canvas>
+      </CanvasWheel>
     </li>
   );
 

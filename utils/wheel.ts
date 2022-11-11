@@ -1,5 +1,5 @@
 import { Sector } from "./sector";
-import { CanvasProps } from "../components/Canvas";
+import { CanvasPropsWheel } from "../components/CanvasWheel";
 
 export interface cardsSrcInt {
   group: string;
@@ -16,7 +16,7 @@ export interface cardsSrcInt {
 export default function sort(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  data: CanvasProps["data"] = []
+  data: CanvasPropsWheel["data"] = []
 ) {
   if (data.length <= 0) return;
   const newData = data

@@ -28,9 +28,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       case "room":
         room(canvas, context, props.data);
         break;
-      case "wheel":
-        wheel(canvas, context, props.data);
-        break;
       case "header":
         header(canvas, context, props.data);
         break;

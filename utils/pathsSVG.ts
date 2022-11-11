@@ -7,6 +7,13 @@ interface DataSVG {
   title: string;
   text?: string[];
   group: string;
+  coords?: {
+    x: number;
+    y: number;
+    canvasW?: number;
+    canvasH?: number;
+    zoom: number;
+  };
 }
 
 export default DataSVG;

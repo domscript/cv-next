@@ -1,25 +1,17 @@
-import DataSVG from "./pathsSVG";
-export interface coordsDataSVG extends DataSVG {
-  coords: {
-    x: number;
-    y: number;
-    canvasW?: number;
-    canvasH?: number;
-    zoom: number;
-  };
-}
+import { CanvasProps } from "../components/Canvas";
+
 export class Me {
   x: number;
   y: number;
   width: number;
   height: number;
-  cardsSrc: coordsDataSVG[];
+  cardsSrc: CanvasProps["data"];
   constructor(
     x: number,
     y: number,
     width: number,
     height: number,
-    cardsSrc: coordsDataSVG[]
+    cardsSrc: CanvasProps["data"]
   ) {
     this.x = x;
     this.y = y;
@@ -48,24 +40,26 @@ export class Me {
         Number(sizeXY[3]) - Number(sizeXY[1]),
       ];
       const size = (Math.max(sizeX, sizeY) / coords.canvasH) * 0.3;
-      const meX = this.cardsSrc[j].coords.x;
-      const meY = this.cardsSrc[j].coords.y;
-      const zoom = this.cardsSrc[j].coords.zoom;
-      for (let i = 0; i < this.cardsSrc[j].detail.length; i++) {
-        context.beginPath();
-        context.moveTo(meX, meY);
-        context.fillStyle = this.cardsSrc[j].detail[i].fill;
+      if (this.cardsSrc[j].coords) {
+        const meX = this.cardsSrc[j].coords.x;
+        const meY = this.cardsSrc[j].coords.y;
+        const zoom = this.cardsSrc[j].coords.zoom;
+        for (let i = 0; i < this.cardsSrc[j].detail.length; i++) {
+          context.beginPath();
+          context.moveTo(meX, meY);
+          context.fillStyle = this.cardsSrc[j].detail[i].fill;
 
-        const p1 = new Path2D(this.cardsSrc[j].detail[i].path);
-        const m = new DOMMatrix();
-        const p = new Path2D();
-        const t = m
-          .scale((1 / size) * zoom)
-          .translate((meX * size) / zoom, (meY * size) / zoom);
+          const p1 = new Path2D(this.cardsSrc[j].detail[i].path);
+          const m = new DOMMatrix();
+          const p = new Path2D();
+          const t = m
+            .scale((1 / size) * zoom)
+            .translate((meX * size) / zoom, (meY * size) / zoom);
 
-        p.addPath(p1, t);
-        context.stroke(p);
-        context.fill(p);
+          p.addPath(p1, t);
+          context.stroke(p);
+          context.fill(p);
+        }
       }
     }
   }

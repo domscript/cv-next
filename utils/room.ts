@@ -1,11 +1,11 @@
 import { Button } from "./button";
-import { coordsDataSVG, Me } from "./me";
+import { Me } from "./me";
 import { CanvasProps } from "../components/Canvas";
 
 export default function sort(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  data: coordsDataSVG[] = []
+  data: CanvasProps["data"] = []
 ) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
   const margin = 30;
