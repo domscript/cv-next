@@ -55,7 +55,7 @@ export default function sort(
     }
     for (let i = 0; i < array.length; i++) {
       const x = i * spacing + spacing / 2 + margin;
-      const y = canvas.height * 0.8 - margin - i * grow;
+      const y = canvas.height * 0.85 - margin - i * grow;
       const width = spacing - gap;
       const height = maxColumnHeight * array[i];
       const colsData = data[i];

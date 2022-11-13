@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -19,6 +19,11 @@ import {
   vsCode,
   PostCSS,
   git,
+  lang,
+  English,
+  Espanol,
+  CardHeart,
+  CardClub,
 } from "../utils/pathsSVG";
 import {
   Events,
@@ -55,41 +60,71 @@ export default function Home() {
     JavaScript,
   ];
   const dataSVGtool = [Webpack, NodeJS, TailwindCSS, vsCode, git];
-  let dataSVG = [...dataSVGlang];
+  const dataSVGlangSpeak = [English, Espanol, English, Espanol];
 
-  const skillsSVG = [
-    Events,
-    Apps,
-    Phone,
-    Video,
-    Webinars,
-    TeamChat,
-    MarketPlace,
-    Solvvy,
-    Whiteboard,
-    Api,
-    ZoomOI,
-    DigitalSignage,
-    ConferenceRooms,
-    WorkSpace,
-    ContactCenter,
-  ];
   const roomSVG = [me, plant, belongings];
-  const dataMain = [
-    JavaScript,
-    NodeJS,
-    Css,
-    Webpack,
-    python,
-    vsCode,
-    Clang,
-    git,
-    TypeScript,
-  ];
+  const dataMain = [lang, JavaScript, git, TypeScript];
+  const dataMainNav = [CardHeart, CardClub];
 
-  function buttonDataHandler(buttonClick: string): void {
+  const buttonDataHandler = useCallback((buttonClick: string): void => {
     setButtonClicked1(buttonClick);
-  }
+  }, []);
+
+  const listItems = useMemo(() => {
+    return [
+      Events,
+      Apps,
+      Phone,
+      Video,
+      Webinars,
+      TeamChat,
+      MarketPlace,
+      Solvvy,
+      Whiteboard,
+      Api,
+      ZoomOI,
+      DigitalSignage,
+      ConferenceRooms,
+      WorkSpace,
+      ContactCenter,
+    ];
+  }, []);
+
+  const sort = (
+    <li className={styles.card}>
+      <Canvas
+        width={500}
+        height={500}
+        className="sort"
+        data={
+          buttonClicked1 === "lang"
+            ? dataSVGlang
+            : buttonClicked1 === "tool"
+            ? dataSVGtool
+            : dataSVGlangSpeak
+        }
+        onChangeData={buttonDataHandler}
+      >
+        <section className="myButtons">
+          <button className="btn" type="button" data-sort="bubble">
+            BS
+          </button>
+          <button className="btn" type="button" data-sort="bubbleBack">
+            BSB
+          </button>
+          <button className="btn" type="button" data-sort="selection">
+            SS
+          </button>
+          <button className="btn" type="button" data-sort="selectionBack">
+            SSB
+          </button>
+          <button className="btn" type="button" data-sort="insertion">
+            IS
+          </button>
+        </section>
+      </Canvas>
+    </li>
+  );
 
   const wheelCanvas = (
     <li className={styles.card}>
@@ -97,11 +132,11 @@ export default function Home() {
         width={500}
         height={500}
         className="wheel"
-        data={skillsSVG}
+        data={listItems}
         onChangeData={buttonDataHandler}
       >
         <section className="myButtons">
-          {skillsSVG.map((el) => {
+          {listItems.map((el) => {
             const text = el.title.toLowerCase();
             return (
               <button key={text} className="btn" type="button" data-sort={text}>
@@ -113,7 +148,47 @@ export default function Home() {
       </CanvasWheel>
     </li>
   );
-
+  // const room = (
+  //   <li className={styles.card}>
+  //     <Canvas
+  //       width={500}
+  //       height={500}
+  //       className="room"
+  //       data={roomSVG}
+  //       onChangeData={buttonDataHandler}
+  //     >
+  //       <section className="myButtons"></section>
+  //     </Canvas>
+  //   </li>
+  // );
+  const header = (
+    <li className={styles.card}>
+      <Canvas
+        width={500}
+        height={500}
+        className="header"
+        data={[...dataMain, ...roomSVG]}
+        onChangeData={buttonDataHandler}
+      >
+        <section className="myButtons">
+          {dataMain.map((el) => {
+            const text = el.title.toLowerCase();
+            const group = el.group.toLowerCase();
+            return (
+              <button
+                key={text + Math.random()}
+                className="btn"
+                type="button"
+                data-sort={group}
+              >
+                {text}
+              </button>
+            );
+          })}
+        </section>
+      </Canvas>
+    </li>
+  );
   return (
     <>
       <Head>
@@ -124,115 +199,9 @@ export default function Home() {
 
       <main className={styles.main}>
         <ul className={styles.grid}>
-          <li className={styles.card}>
-            <Canvas
-              width={500}
-              height={200}
-              className="header"
-              data={dataMain}
-              onChangeData={buttonDataHandler}
-            >
-              <section className="myButtons">
-                {dataMain.map((el) => {
-                  const text = el.title.toLowerCase();
-                  const group = el.group.toLowerCase();
-                  return (
-                    <button
-                      key={text + Math.random()}
-                      className="btn"
-                      type="button"
-                      data-sort={group}
-                    >
-                      {text}
-                    </button>
-                  );
-                })}
-              </section>
-            </Canvas>
-          </li>
-          <li className={styles.card}>
-            <Canvas
-              width={500}
-              height={500}
-              className="sort"
-              data={buttonClicked1 === "lang" ? dataSVGlang : dataSVGtool}
-              onChangeData={buttonDataHandler}
-            >
-              <section className="myButtons">
-                <button className="btn" type="button" data-sort="bubble">
-                  BS
-                </button>
-                <button className="btn" type="button" data-sort="bubbleBack">
-                  BSB
-                </button>
-                <button className="btn" type="button" data-sort="selection">
-                  SS
-                </button>
-                <button className="btn" type="button" data-sort="selectionBack">
-                  SSB
-                </button>
-                <button className="btn" type="button" data-sort="insertion">
-                  IS
-                </button>
-              </section>
-            </Canvas>
-          </li>
-
-          <li className={styles.card}>
-            <Canvas
-              width={500}
-              height={500}
-              className="room"
-              data={roomSVG}
-              onChangeData={buttonDataHandler}
-            >
-              <section className="myButtons">
-                {/* <button className="btn" type="button" data-sort="bubble">
-                  BS
-                </button>
-                <button className="btn" type="button" data-sort="bubbleBack">
-                  BSB
-                </button>
-                <button className="btn" type="button" data-sort="selection">
-                  SS
-                </button>
-                <button className="btn" type="button" data-sort="selectionBack">
-                  SSB
-                </button>
-                <button className="btn" type="button" data-sort="insertion">
-                  IS
-                </button> */}
-              </section>
-            </Canvas>
-          </li>
+          {header}
+          {sort}
           {wheelCanvas}
-          {/* <li className={styles.card}>
-            <Canvas
-              width={500}
-              height={500}
-              className="sort"
-              data={dataSVG}
-              onChangeData={buttonDataHandler}
-            >
-              <section className="myButtons">
-                <button className="btn" type="button" data-sort="bubble">
-                  BS
-                </button>
-                <button className="btn" type="button" data-sort="bubbleBack">
-                  BSB
-                </button>
-                <button className="btn" type="button" data-sort="selection">
-                  SS
-                </button>
-                <button className="btn" type="button" data-sort="selectionBack">
-                  SSB
-                </button>
-                <button className="btn" type="button" data-sort="insertion">
-                  IS
-                </button>
-              </section>
-            </Canvas>
-          </li> */}
         </ul>
       </main>
       <Footer />

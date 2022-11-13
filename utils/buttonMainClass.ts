@@ -20,7 +20,6 @@ export class buttonMainClass {
     this.height = height;
     this.data = data;
     this.el = el;
-    // this.queue = [];
   }
 
   // moveTo(loc, yOffset = 1, frameCount = 20) {
@@ -55,13 +54,13 @@ export class buttonMainClass {
 
     context.beginPath();
     context.fillStyle = data.detail[0].fill;
-    context.moveTo(left, top + height / 6);
+    context.moveTo(left, top);
     context.lineTo(left, this.y);
-    context.lineTo(center, this.y + height / 6);
+    // context.lineTo(center, this.y + height / 6);
     context.lineTo(right, this.y);
-    context.lineTo(right, top + height / 6);
-    context.lineTo(center, top);
-    context.lineTo(left, top + height / 6);
+    context.lineTo(right, top);
+    // context.lineTo(center, top);
+    context.lineTo(left, top);
     context.fill();
     context.stroke();
 

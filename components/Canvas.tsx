@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
 import room from "../utils/room";
-import wheel from "../utils/wheel";
 import { buttonMainClass } from "../utils/buttonMainClass";
+import { Me } from "../utils/me";
 
 export interface CanvasProps {
   children: React.ReactNode;
@@ -42,26 +42,23 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     data: CanvasProps["data"] = []
   ) {
     const myButtons = canvas.getElementsByClassName("myButtons")[0];
-    const margin = 30;
+    const margin = 360;
 
-    let amount = data.length;
-    const buttonHeight = canvas.height * 0.4;
+    const buttonData = data.filter(
+      (el) =>
+        el.group === "lang" || el.group === "tool" || el.group === "button"
+    );
+    const roomData = data.filter(
+      (el) => el.group === "room" || el.group === "me"
+    );
+    let amount = buttonData.length;
+    const buttonHeight = canvas.height * 0.17;
     let array = [];
     let buttons: buttonMainClass[] = [];
 
-    const spacing = (canvas.width - margin * 2) / amount;
-    const gap = 2;
+    const spacing = buttonHeight;
+    const gap = 5;
 
-    for (let i = 0; i < amount; i++) {
-      array[i] = buttonHeight;
-      const el = myButtons.children[i] as HTMLElement;
-      const x = i * spacing + spacing / 2 + margin;
-      const y = canvas.height * 0.8 - margin;
-      const width = spacing - gap;
-      const height = buttonHeight;
-      buttons[i] = new buttonMainClass(x, y, width, height, data[i], el);
-      buttons[i].draw(context);
-    }
     canvas.addEventListener("pointerdown", (e: PointerEvent) => {
       handleClick(e);
     });
@@ -82,6 +79,66 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         }
       }
     }
+
+    context.beginPath();
+    const img = new Image();
+    img.src = "image/room2.svg";
+    img.onload = () => {
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      roomData[0].coords = {
+        x: 150,
+        y: 255,
+        zoom: 1,
+      };
+      roomData[1].coords = {
+        x: 40,
+        y: 370,
+        zoom: 0.5,
+      };
+      roomData[2].coords = {
+        x: 160,
+        y: 290,
+        zoom: 1,
+      };
+
+      const coords: {
+        x: number;
+        y: number;
+        canvasW: number;
+        canvasH: number;
+      } = {
+        x: 50,
+        y: 50,
+        canvasW: canvas.width / 8,
+        canvasH: canvas.height / 8,
+      };
+
+      const homeObjects = [];
+
+      for (let i = 0; i < 1; i++) {
+        const [x, y] = [0, 0];
+        homeObjects[i] = new Me(x, y, 100, 100, roomData);
+        homeObjects[i].draw(context, coords);
+      }
+      for (let i = 0; i < amount; i++) {
+        array[i] = buttonHeight;
+        const el = myButtons.children[i] as HTMLElement;
+        const x = spacing / 2 + margin;
+        const y = canvas.height * 0.32 + i * (buttonHeight + gap);
+        const width = spacing - gap;
+        const height = buttonHeight;
+        buttons[i] = new buttonMainClass(
+          x,
+          y,
+          width,
+          height,
+          buttonData[i],
+          el
+        );
+        buttons[i].draw(context);
+      }
+    };
 
     // animate();
 

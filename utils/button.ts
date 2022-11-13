@@ -28,7 +28,7 @@ export class Button {
     const height = this.height;
 
     // Button background
-    context.fillStyle = "lightgray";
+    context.fillStyle = "#d0af30";
     context.fillRect(left, top, width, height);
 
     // Button text

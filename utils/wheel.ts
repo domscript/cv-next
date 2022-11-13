@@ -41,8 +41,7 @@ export default function sort(
         k.lines.push({
           viewBox: data[i].viewBox,
           detail: [...data[i].detail],
-          // text: data[i].text && [""],
-          text: [""],
+          text: data[i].text as string[],
         });
     });
   });
