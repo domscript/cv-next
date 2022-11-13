@@ -7,18 +7,17 @@ const Footer = (): JSX.Element => {
       <p>&copy; Copyright {new Date().getFullYear()}</p>
       <ul className="flex flex-row mx-auto">
         {contacts.map((el) => (
-          <li key={el.title} className="px-2 m-2">
-            <LinkButton
-              title={el.title}
-              path={el.path}
-              href={el.href}
-              viewBox={el.viewBox}
-              color={el.color}
-              width={30}
-              height={30}
-              className="px-2 m-2"
-            />
-          </li>
+          <LinkButton
+            key={el.title}
+            className="px-2 m-2"
+            title={el.title}
+            path={el.path}
+            href={el.href}
+            viewBox={el.viewBox}
+            color={el.color}
+            width={30}
+            height={30}
+          />
         ))}
       </ul>
     </footer>

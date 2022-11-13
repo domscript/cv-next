@@ -89,6 +89,9 @@ export default function sort(
   const sectors: Sector[] = [];
 
   function init() {
+    for (let sector in sectors) {
+      sectors.shift();
+    }
     for (let i = 0; i < angles.length - 1; i++) {
       const [x, y] = [canvas.width / 2, canvas.height / 2];
       const radius = canvas.width / 2;
