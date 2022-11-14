@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
 import { cutText } from "../utils/cutText";
-// import Canvas from "./Canvas";
+import CanvasRobot from "./CanvasRobot";
 
 export interface PostsInt {
   slug: string;
@@ -66,7 +66,7 @@ export default function Post({
             Read more
           </Link>
           <div className="flex items-center">
-            {/* <Canvas width={30} height={30} className="mx-2">
+            <CanvasRobot width={30} height={30} className="mx-2">
               <Image
                 src={post.frontmatter.author_image}
                 alt={post.frontmatter.author}
@@ -74,7 +74,7 @@ export default function Post({
                 height={30}
                 className="mx-4 w-10 h-10 object-cover rounded pl-10 hidden sm:block"
               />
-            </Canvas> */}
+            </CanvasRobot>
             <h3 className="text-gray-700 font-bold">
               {post.frontmatter.author}
             </h3>

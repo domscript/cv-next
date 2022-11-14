@@ -7,7 +7,7 @@ import Image from "next/image";
 import Layout from "../../components/Layout";
 import CategoryLabel from "../../components/CategoryLabel";
 import dateFormatter from "../../utils/dateFormatter";
-// import Canvas from "../../components/Canvas";
+import CanvasRobot from "../../components/CanvasRobot";
 import { GetStaticProps, GetStaticPaths } from "next";
 
 interface PostPageint {
@@ -50,7 +50,7 @@ export default function PostPage({
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
-            {/* <Canvas width={30} height={30} className="mx-2">
+            <CanvasRobot width={30} height={30} className="mx-2">
               <Image
                 src={author_image}
                 alt={author}
@@ -58,7 +58,7 @@ export default function PostPage({
                 height={20}
                 className="mx-4 w-10 h-10 object-cover rounded hidden sm:block"
               />
-            </Canvas> */}
+            </CanvasRobot>
             <h4>{author}</h4>
           </div>
           <div className="mr-4">{date}</div>
@@ -70,7 +70,7 @@ export default function PostPage({
           ></div>
         </div>
       </div>
-      </Layout>
+    </Layout>
   );
 }
 
