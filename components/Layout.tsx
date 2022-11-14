@@ -3,6 +3,7 @@ import BaseHead from "./BaseHead";
 import Footer from "./Footer";
 import Header from "./Header";
 import Search from "./Search";
+import styles from "../styles/Home.module.css";
 
 interface LayoutInt {
   title: string;
@@ -22,7 +23,7 @@ export default function Layout({
   children,
 }: LayoutInt): JSX.Element {
   return (
-    <div>
+    <>
       <Head>
         <BaseHead
           title={title}
@@ -32,11 +33,11 @@ export default function Layout({
           siteUrl={siteUrl}
         />
       </Head>
-      <Header />
+      <Header className={""} />
       <Search />
       <main className="container mx-auto my-7">{children}</main>
-      <Footer />
-    </div>
+      <Footer className={""} />
+    </>
   );
 }
 

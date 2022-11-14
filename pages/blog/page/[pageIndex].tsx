@@ -19,7 +19,7 @@ export default function BlogPage({
   categories: string[];
 }) {
   return (
-    <Layout>
+    <Layout title="Blog">
       <div className="flex justify-between flex-col md:flex-row">
         <div className="m-auto w-11/12 md:w-3/4">
           <h1 className="text-5xl border-b-4 p-5 font-bold">Blog</h1>

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Header() {
+export default function Header(props: { className: string }) {
+  const styles = `bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 text-lime-300 font-bold shadow w-full ${props.className}`;
+
   return (
-    <header className="bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 text-lime-300 font-bold shadow w-full">
+    <header className={styles}>
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link
           href="/"

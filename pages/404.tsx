@@ -4,10 +4,10 @@ import Layout from "../components/Layout";
 
 export default function NotFoundPage() {
   return (
-    <Layout title="Page Not Found">
+    <Layout title="Error">
       <div className="flex flex-col items-center mt-20">
         <Image
-          src="/logoti.svg"
+          src="/image/c_lang.svg"
           alt=""
           width={70}
           height={70}
@@ -21,7 +21,7 @@ export default function NotFoundPage() {
           href="/blog"
           className="block text-center border border-gray-500 text-gray-800 rounded-md py-4 my-5 transition duration-500 ease select-none hover:text-white hover:bg-gray-900 focus:outline-none focus:shadow-outline w-full"
         >
-          Все посты
+          All Posts
         </Link>
       </div>
     </Layout>

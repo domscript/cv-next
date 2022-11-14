@@ -1,9 +1,11 @@
 import LinkButton from "./LinkButton";
 import { contacts } from "../utils/contacts";
 
-const Footer = (): JSX.Element => {
+const Footer = (props: { className: string }): JSX.Element => {
+  const styles = `flex flex-col text-slate-700 text-center ${props.className}`;
+
   return (
-    <footer className="flex flex-col text-slate-700 text-center">
+    <footer className={styles}>
       <p>&copy; Copyright {new Date().getFullYear()}</p>
       <ul className="flex flex-row mx-auto">
         {contacts.map((el) => (

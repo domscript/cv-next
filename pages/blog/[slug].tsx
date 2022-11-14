@@ -30,7 +30,7 @@ export default function PostPage({
   slug: string;
 }) {
   return (
-    <Layout title={title}>
+    <Layout title="Blog">
       <p className="ml-5">
         <Link href="/blog">Back</Link>
       </p>
@@ -70,7 +70,7 @@ export default function PostPage({
           ></div>
         </div>
       </div>
-    </Layout>
+      </Layout>
   );
 }
 
