@@ -1,11 +1,14 @@
-export default function leafHeart(
+export default function squareRobot(
   canvas: HTMLCanvasElement,
-  context: CanvasRenderingContext2D
+  context: CanvasRenderingContext2D,
+  scale: number,
+  x01: number,
+  y01: number
 ) {
-  function squareRobot(x: number, y: number, y0: number, p: number) {
+  function robotBody(x: number, y: number, y0: number, p: number) {
     // x, y - coord, size - size
-    const height = canvas.height;
-    const widht = canvas.width;
+    const height = canvas.height * scale;
+    const widht = canvas.width * scale;
     const heightBody = height / 2.2;
     const widhtBody = widht / 1.5;
     const heightEars = height / 10;
@@ -26,57 +29,67 @@ export default function leafHeart(
     context.fillStyle = "#991b1b";
     context.rect(
       x - widhtBody / 2,
-      heightHead + heightNeck + heightEars,
+      heightHead + heightNeck + heightEars + y01,
       widhtBody,
       heightBody
     );
     // head
-    context.moveTo(x - widhtHead / 2, heightEars);
-    context.rect(x - widhtHead / 2, heightEars, widhtHead, heightHead);
+    context.moveTo(x - widhtHead / 2, heightEars + y01);
+    context.rect(x - widhtHead / 2, heightEars + y01, widhtHead, heightHead);
     // leg from right
     context.moveTo(
       x - widhtBody / 5,
-      heightBody + heightHead + heightNeck + heightEars - p
+      heightBody + heightHead + heightNeck + heightEars - p + y01
     );
     context.rect(
       x + widhtBody / 5,
-      heightBody + heightHead + heightNeck + heightEars - p,
+      heightBody + heightHead + heightNeck + heightEars - p + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // leg from left
     context.moveTo(
       x + widhtBody / 2.5,
-      heightHead + heightNeck + heightEars + p - y0
+      heightHead + heightNeck + heightEars + p - y0 + y01
     );
     context.rect(
       x - widhtBody / 2.5,
-      heightBody + heightHead + heightNeck + heightEars + p - y0,
+      heightBody + heightHead + heightNeck + heightEars + p - y0 + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // arm from right
-    context.moveTo(x + widhtBody / 2, heightHead + heightNeck - p);
+    context.moveTo(x + widhtBody / 2, heightHead + heightNeck - p + y01);
     context.rect(
       x + widhtBody / 2,
-      heightHead + heightNeck + heightEars - p,
+      heightHead + heightNeck + heightEars - p + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // arm from left
-    context.moveTo(x + widhtBody / 2, heightHead + heightNeck + p);
+    context.moveTo(x + widhtBody / 2, heightHead + heightNeck + p + y01);
     context.rect(
       x - widhtBody / 2,
-      heightHead + heightNeck + heightEars - p,
+      heightHead + heightNeck + heightEars - p + y01,
       -widhtBody / 5,
       heightBody / 5
     );
     // ear from left
-    context.moveTo(x - widhtHead / 4 + p / 2, 0);
-    context.rect(x - widhtHead / 4 + p / 2, 0, widhtBody / 10, heightBody / 5);
+    context.moveTo(x - widhtHead / 4 + p / 2, y01);
+    context.rect(
+      x - widhtHead / 4 + p / 2,
+      y01,
+      widhtBody / 10,
+      heightBody / 5
+    );
     // ear from right
-    context.moveTo(x + widhtHead / 4 + p / 2, 0);
-    context.rect(x + widhtHead / 4 + p / 2, 0, widhtBody / 10, heightBody / 5);
+    context.moveTo(x + widhtHead / 4 + p / 2, y01);
+    context.rect(
+      x + widhtHead / 4 + p / 2,
+      y01,
+      widhtBody / 10,
+      heightBody / 5
+    );
     context.fill();
     context.stroke();
     // eyes
@@ -85,14 +98,14 @@ export default function leafHeart(
     context.fillStyle = "black";
     context.rect(
       x - widhtHead / 3,
-      heightHead / 7 + heightEars + y0 / 4 - p / 4,
+      heightHead / 7 + heightEars + y0 / 4 - p / 4 + y01,
       widhtHead / 5,
       heightHead / 7 + p / 4 - y0 / 4
     );
-    context.moveTo(x + widhtHead / 3, heightHead / 3);
+    context.moveTo(x + widhtHead / 3, heightHead / 3 + y01);
     context.rect(
       x + widhtHead / 3,
-      heightHead / 7 + heightEars + y0 / 4 - p / 4,
+      heightHead / 7 + heightEars + y0 / 4 - p / 4 + y01,
       -widhtHead / 5,
       heightHead / 7 + p / 4 - y0 / 4
     );
@@ -103,14 +116,14 @@ export default function leafHeart(
     context.fillStyle = "white";
     context.rect(
       x - ((widhtHead / 5) * p) / 12,
-      heightHead / 1.5 + heightEars,
+      heightHead / 1.5 + heightEars + y01,
       ((widhtHead / 5) * p) / 12,
       heightHead / 8
     );
-    context.moveTo(x + ((widhtHead / 5) * p) / 12, heightHead / 1.5);
+    context.moveTo(x + ((widhtHead / 5) * p) / 12, heightHead / 1.5 + y01);
     context.rect(
       x + ((widhtHead / 5) * p) / 12,
-      heightHead / 1.5 + heightEars,
+      heightHead / 1.5 + heightEars + y01,
       ((-widhtHead / 5) * p) / 12,
       heightHead / 8
     );
@@ -119,7 +132,7 @@ export default function leafHeart(
   }
   function heart(x: number, y: number, scale2: number) {
     const xHeart = x + scale2 * 1.4,
-      yHeart = y / 2.5 + scale2 * 2.6;
+      yHeart = y / 2 + scale2;
     context.beginPath();
     context.lineWidth = 1;
     context.strokeStyle = "black";
@@ -138,24 +151,22 @@ export default function leafHeart(
   }
   let p = 0,
     sign = 1;
-  const x = canvas.width / 2,
-    y = canvas.height,
-    size = Math.min(canvas.width, canvas.height);
+  const x = (canvas.width / 2) * scale + x01,
+    y = canvas.height * scale + y01,
+    size = Math.min(canvas.width * scale, canvas.height * scale);
 
   function animate() {
     // 0 < p < 1;
     p = p + 0.01 * sign;
     if (p > 1 || p < 0) sign = sign * -1;
-    const legsArms = (p * y) / 8;
-    const y0 = y / 8;
-    const scale =
+    const legsArms = (p * (y - y01)) / 8;
+    const y0 = (y - y01) / 8;
+    const scale10 =
       (size / 10) *
       (1 + 0.3 * Math.sin(Math.PI * p) * Math.cos(Math.PI * p) ** 2);
-    const y2 = y - scale;
-
     context.clearRect(0, 0, canvas.width, canvas.height);
-    squareRobot(x, y, y0, legsArms);
-    heart(x * 1.2, y2, scale / 1.5);
+    robotBody(x, y, y0, legsArms);
+    heart(x + 8, y + y01, scale10 / 1.5);
     requestAnimationFrame(animate);
   }
 

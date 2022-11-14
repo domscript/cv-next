@@ -16,7 +16,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     const context = canvas.getContext("2d");
     if (context === null) return;
 
-    squareRobot(canvas, context);
+    squareRobot(canvas, context, 1, 0, 0);
   }, []);
 
   return <canvas ref={canvasRef} {...props} />;
