@@ -1,5 +1,5 @@
 import DataSVG from "./pathsSVG";
-export class buttonMainClass {
+export class ButtonMainClass {
   x: number;
   y: number;
   width: number;

@@ -37,7 +37,11 @@ export class Button {
       context.textAlign = "center";
       context.textBaseline = "middle";
       context.fillStyle = "black";
-      context.fillText(el.textContent, left + width / 2, top + height / 2);
+      context.fillText(
+        el.textContent.toUpperCase(),
+        left + width / 2,
+        top + height / 2
+      );
     }
 
     // Define clickable area

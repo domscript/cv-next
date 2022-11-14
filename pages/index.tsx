@@ -1,6 +1,6 @@
 import { useCallback, useState, useMemo } from "react";
 import Head from "next/head";
-import Image from "next/image";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Canvas from "../components/Canvas";
 import CanvasWheel from "../components/CanvasWheel";
@@ -64,7 +64,6 @@ export default function Home() {
 
   const roomSVG = [me, plant, belongings];
   const dataMain = [lang, JavaScript, git, TypeScript];
-  const dataMainNav = [CardHeart, CardClub];
 
   const buttonDataHandler = useCallback((buttonClick: string): void => {
     setButtonClicked1(buttonClick);
@@ -125,7 +124,6 @@ export default function Home() {
       </Canvas>
     </li>
   );
-
   const wheelCanvas = (
     <li className={styles.card}>
       <CanvasWheel
@@ -148,26 +146,13 @@ export default function Home() {
       </CanvasWheel>
     </li>
   );
-  // const room = (
-  //   <li className={styles.card}>
-  //     <Canvas
-  //       width={500}
-  //       height={500}
-  //       className="room"
-  //       data={roomSVG}
-  //       onChangeData={buttonDataHandler}
-  //     >
-  //       <section className="myButtons"></section>
-  //     </Canvas>
-  //   </li>
-  // );
   const header = (
     <li className={styles.card}>
       <Canvas
         width={500}
         height={500}
         className="header"
-        data={[...dataMain, ...roomSVG]}
+        data={[...dataMain, ...roomSVG, CardHeart]}
         onChangeData={buttonDataHandler}
       >
         <section className="myButtons">
@@ -176,7 +161,7 @@ export default function Home() {
             const group = el.group.toLowerCase();
             return (
               <button
-                key={text + Math.random()}
+                key={text}
                 className="btn"
                 type="button"
                 data-sort={group}
@@ -185,6 +170,11 @@ export default function Home() {
               </button>
             );
           })}
+        </section>
+        <section className="homeButtons">
+          <Link href="/blog" className="btn" type="button" data-page="page">
+            BLOG
+          </Link>
         </section>
       </Canvas>
     </li>
@@ -205,6 +195,9 @@ export default function Home() {
         </ul>
       </main>
       <Footer />
+      <Link href="/blog" className="btn" data-page="page">
+        BLOG
+      </Link>
     </>
   );
 }

@@ -74,12 +74,12 @@ export const CardClub: DataSVG = {
 };
 
 export const CardHeart: DataSVG = {
-  group: "card",
-  title: "",
+  group: "page",
+  title: "blog",
   viewBox: "0 0 384 512",
   detail: [
     {
-      fill: "#000000",
+      fill: "#333333",
       path: "",
     },
     {

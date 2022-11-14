@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import DataSVG from "../utils/pathsSVG";
 import sort from "../utils/sort";
 import room from "../utils/room";
-import { buttonMainClass } from "../utils/buttonMainClass";
+import { ButtonMainClass } from "../utils/buttonMainClass";
+import { Button } from "../utils/button";
 import { Me } from "../utils/me";
 
 export interface CanvasProps {
@@ -42,6 +44,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     data: CanvasProps["data"] = []
   ) {
     const myButtons = canvas.getElementsByClassName("myButtons")[0];
+    const homeButtons = canvas.getElementsByClassName("homeButtons")[0];
     const margin = 360;
 
     const buttonData = data.filter(
@@ -51,11 +54,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     const roomData = data.filter(
       (el) => el.group === "room" || el.group === "me"
     );
-    let amount = buttonData.length;
-    const buttonHeight = canvas.height * 0.17;
-    let array = [];
-    let buttons: buttonMainClass[] = [];
+    const pageData = data.filter((el) => el.group === "page");
 
+    const amount = buttonData.length;
+    const amoutHome = pageData.length;
+    const buttonHeight = canvas.height * 0.17;
+    let buttons: ButtonMainClass[] = [];
+    let pageButton: Button[] = [];
     const spacing = buttonHeight;
     const gap = 5;
 
@@ -78,6 +83,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           buttons[j].el.className = "btn active";
         }
       }
+      // pageButton[0].draw(context);
+      // if (context.isPointInPath(x, y)) {
+      //   const page = pageButton[0].el.dataset.page as string;
+      //   // console.log(page);
+      // }
     }
 
     context.beginPath();
@@ -122,13 +132,12 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         homeObjects[i].draw(context, coords);
       }
       for (let i = 0; i < amount; i++) {
-        array[i] = buttonHeight;
         const el = myButtons.children[i] as HTMLElement;
         const x = spacing / 2 + margin;
         const y = canvas.height * 0.32 + i * (buttonHeight + gap);
         const width = spacing - gap;
         const height = buttonHeight;
-        buttons[i] = new buttonMainClass(
+        buttons[i] = new ButtonMainClass(
           x,
           y,
           width,
@@ -137,6 +146,15 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           el
         );
         buttons[i].draw(context);
+      }
+      for (let i = 0; i < amoutHome; i++) {
+        const el = homeButtons.children[i] as HTMLElement;
+        const x = spacing / 2 + margin;
+        const y = canvas.height * 0.1 + i * (buttonHeight + gap);
+        const width = spacing - gap;
+        const height = buttonHeight / 3;
+        pageButton[i] = new Button(x, y, width, height, el);
+        // pageButton[i].draw(context);
       }
     };
 
