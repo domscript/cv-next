@@ -3,7 +3,7 @@ import path from "path";
 import Layout from "../../../components/Layout";
 import Post, { PostsInt } from "../../../components/Post";
 import CategoryList from "../../../components/CategoryList";
-import matter from "gray-matter";
+const matter = require("gray-matter");
 import { getPosts } from "../../../lib/posts";
 import dateFormatter from "../../../utils/dateFormatter";
 

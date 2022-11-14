@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import * as matter from "gray-matter";
+const matter = require("gray-matter");
 import { marked } from "marked";
 import Link from "next/link";
 import Image from "next/image";

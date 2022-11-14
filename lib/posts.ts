@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import * as matter from "gray-matter";
+const matter = require("gray-matter");
 import { sortPostsByDate } from "../utils/sortPostsByDate";
 import dateFormatter from "../utils/dateFormatter";
 
