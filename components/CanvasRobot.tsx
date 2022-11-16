@@ -1,25 +1,26 @@
-import React, { useRef, useEffect } from "react";
-import squareRobot from "../utils/squareRobot";
+import React, { useCallback } from "react";
+import useCanvas from "hooks/use-canvas";
 
-export interface CanvasProps {
+export interface CanvasRobotProps {
   children: React.ReactNode;
   className: string;
   width: number;
   height: number;
+  draw: (
+    context: CanvasRenderingContext2D,
+    frameCount: number,
+    scale: number,
+    x01: number,
+    y01: number
+  ) => void;
 }
 
-const Canvas = (props: CanvasProps): JSX.Element => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas === null) return;
-    const context = canvas.getContext("2d");
-    if (context === null) return;
+const CanvasRobot = (props: CanvasRobotProps): JSX.Element => {
+  const { draw, ...rest } = props;
 
-    squareRobot(canvas, context, 1, 0, 0);
-  }, []);
+  const canvasRef = useCanvas(draw);
 
-  return <canvas ref={canvasRef} {...props} />;
+  return <canvas ref={canvasRef} {...rest} />;
 };
 
-export default Canvas;
+export default CanvasRobot;

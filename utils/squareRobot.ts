@@ -1,14 +1,14 @@
-export default function squareRobot(
-  canvas: HTMLCanvasElement,
+const squareRobotNew = (
   context: CanvasRenderingContext2D,
+  frameCount: number,
   scale: number,
   x01: number,
   y01: number
-) {
+) => {
   function robotBody(x: number, y: number, y0: number, p: number) {
     // x, y - coord, size - size
-    const height = canvas.height * scale;
-    const widht = canvas.width * scale;
+    const height = context.canvas.height * scale;
+    const widht = context.canvas.width * scale;
     const heightBody = height / 2.2;
     const widhtBody = widht / 1.5;
     const heightEars = height / 10;
@@ -150,25 +150,23 @@ export default function squareRobot(
     context.stroke();
   }
   let p = 0,
-    sign = 1;
-  const x = (canvas.width / 2) * scale + x01,
-    y = canvas.height * scale + y01,
-    size = Math.min(canvas.width * scale, canvas.height * scale);
+    sign = frameCount;
+  const x = (context.canvas.width / 2) * scale + x01,
+    y = context.canvas.height * scale + y01,
+    size = Math.min(
+      context.canvas.width * scale,
+      context.canvas.height * scale
+    );
 
-  function animate() {
-    // 0 < p < 1;
-    p = p + 0.01 * sign;
-    if (p > 1 || p < 0) sign = sign * -1;
-    const legsArms = (p * (y - y01)) / 8;
-    const y0 = (y - y01) / 8;
-    const scale10 =
-      (size / 10) *
-      (1 + 0.3 * Math.sin(Math.PI * p) * Math.cos(Math.PI * p) ** 2);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    robotBody(x, y, y0, legsArms);
-    heart(x + 8, y + y01, scale10 / 1.5);
-    requestAnimationFrame(animate);
-  }
+  // 0 < p < 1;
+  p = p + 0.01 * sign;
+  const legsArms = (p * (y - y01)) / 8;
+  const y0 = (y - y01) / 8;
+  const scale10 =
+    (size / 10) *
+    (1 + 0.3 * Math.sin(Math.PI * p) * Math.cos(Math.PI * p) ** 2);
+  robotBody(x, y, y0, legsArms);
+  heart((x - x01) * 1.2 + x01, y + y01, scale10 / 1.5);
+};
 
-  animate();
-}
+export default squareRobotNew;

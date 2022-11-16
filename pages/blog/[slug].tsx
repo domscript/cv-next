@@ -7,7 +7,9 @@ import Image from "next/image";
 import Layout from "../../components/Layout";
 import CategoryLabel from "../../components/CategoryLabel";
 import dateFormatter from "../../utils/dateFormatter";
+import { useCallback } from "react";
 import CanvasRobot from "../../components/CanvasRobot";
+import squareRobotNew from "@/utils/squareRobot";
 import { GetStaticProps, GetStaticPaths } from "next";
 
 interface PostPageint {
@@ -29,6 +31,7 @@ export default function PostPage({
   content: string;
   slug: string;
 }) {
+  const draw = useCallback(squareRobotNew, []);
   return (
     <Layout title="Blog">
       <p className="ml-5">
@@ -50,7 +53,7 @@ export default function PostPage({
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
-            <CanvasRobot width={30} height={30} className="mx-2">
+            <CanvasRobot width={30} height={30} className="mx-2" draw={draw}>
               <Image
                 src={author_image}
                 alt={author}

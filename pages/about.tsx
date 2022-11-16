@@ -1,11 +1,14 @@
+import { useCallback } from "react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import CanvasRobot from "../components/CanvasRobot";
+import squareRobotNew from "@/utils/squareRobot";
 
 export default function AboutPage() {
+  const draw = useCallback(squareRobotNew, []);
   return (
     <Layout title="About">
-      <CanvasRobot width={200} height={200} className="mx-auto">
+      <CanvasRobot width={200} height={200} className="mx-auto" draw={draw}>
         <Image
           src="/image/posts/undraw_powerful_re_frhr.svg"
           alt="Powerful Girl"
