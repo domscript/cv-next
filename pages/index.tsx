@@ -24,6 +24,7 @@ import {
   lang,
   English,
   Espanol,
+  Deutsch,
   CardHeart,
   CardClub,
 } from "../utils/pathsSVG";
@@ -78,7 +79,7 @@ export default function Home({
     JavaScript,
   ];
   const dataSVGtool = [Webpack, NodeJS, TailwindCSS, vsCode, git];
-  const dataSVGlangSpeak = [English, Espanol, English, Espanol];
+  const dataSVGlangSpeak = [English, Espanol, Deutsch];
 
   const roomSVG = [me, plant, belongings];
   const dataMain = [lang, JavaScript, git, TypeScript];
