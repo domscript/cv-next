@@ -1,37 +1,17 @@
 import { lerp } from "./math";
 import { cardsSrcInt } from "./wheel";
 export class Sector {
-  x: number;
-  y: number;
-  radius: number;
-  inner = 30;
-  outer = 10;
-  angleStart = 0;
-  angle = 180;
-  icons = 1;
-  cardsSrc: cardsSrcInt;
   constructor(
-    x: number,
-    y: number,
-    radius: number,
-    inner = 30,
-    outer = 10,
-    angleStart = 0,
-    angle = 180,
-    icons = 1,
-    cardsSrc: cardsSrcInt
-  ) {
-    // inner %, outer %, angle deg
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.inner = inner;
-    this.outer = outer;
-    this.angleStart = angleStart;
-    this.angle = angle;
-    this.icons = icons;
-    this.cardsSrc = cardsSrc;
-  }
+    public x: number,
+    public y: number,
+    public radius: number,
+    public inner = 30, // %
+    public outer = 10, // %
+    public angleStart = 0, // deg
+    public angle = 180, // deg
+    public icons = 1,
+    public cardsSrc: cardsSrcInt
+  ) {}
 
   rotateTo(sector: Sector, frameCount = 10) {
     // frameCount always should be Int round Up

@@ -1,24 +1,13 @@
 import { CanvasProps } from "../components/Canvas";
 
 export class Me {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  cardsSrc: CanvasProps["data"];
   constructor(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    cardsSrc: CanvasProps["data"]
-  ) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.cardsSrc = cardsSrc;
-  }
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+    public cardsSrc: CanvasProps["data"]
+  ) {}
 
   draw(
     context: CanvasRenderingContext2D,

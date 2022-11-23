@@ -1,22 +1,11 @@
 export class Button {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  el: HTMLElement;
   constructor(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    el: HTMLElement
-  ) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.el = el;
-  }
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+    public el: HTMLElement
+  ) {}
 
   draw(context: CanvasRenderingContext2D) {
     const left = this.x - this.width / 2;

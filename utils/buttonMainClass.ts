@@ -1,25 +1,25 @@
 import DataSVG from "./pathsSVG";
 export class ButtonMainClass {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  data: DataSVG;
-  el: HTMLElement;
+  // x: number;
+  // y: number;
+  // width: number;
+  // height: number;
+  // data: DataSVG;
+  // el: HTMLElement;
   constructor(
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    data: DataSVG,
-    el: HTMLElement
+    public x: number,
+    public y: number,
+    public width: number,
+    public height: number,
+    public data: DataSVG,
+    public el: HTMLElement
   ) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.data = data;
-    this.el = el;
+    // this.x = x;
+    // this.y = y;
+    // this.width = width;
+    // this.height = height;
+    // this.data = data;
+    // this.el = el;
   }
 
   // moveTo(loc, yOffset = 1, frameCount = 20) {
