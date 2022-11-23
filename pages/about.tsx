@@ -2,13 +2,25 @@ import { useCallback } from "react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import CanvasRobot from "../components/CanvasRobot";
-import squareRobotNew from "@/utils/squareRobot";
+import { squareRobotNew } from "@/utils/squareRobot";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export default function AboutPage() {
   const draw = useCallback(squareRobotNew, []);
+  const positionAndSize: positionAndSizeInt = {
+    x01: 0,
+    y01: 0,
+    scale: 1, // 1 === 100%
+  };
   return (
     <Layout title="About">
-      <CanvasRobot width={200} height={200} className="mx-auto" draw={draw}>
+      <CanvasRobot
+        width={200}
+        height={200}
+        className="mx-auto"
+        draw={draw}
+        positionAndSize={positionAndSize}
+      >
         <Image
           src="/image/posts/undraw_powerful_re_frhr.svg"
           alt="Powerful Girl"

@@ -4,13 +4,14 @@ const matter = require("gray-matter");
 import { marked } from "marked";
 import Link from "next/link";
 import Image from "next/image";
-import Layout from "../../components/Layout";
-import CategoryLabel from "../../components/CategoryLabel";
-import dateFormatter from "../../utils/dateFormatter";
+import Layout from "@/components/Layout";
+import CategoryLabel from "@/components/CategoryLabel";
+import { dateFormatter } from "@/utils/dateFormatter";
 import { useCallback } from "react";
-import CanvasRobot from "../../components/CanvasRobot";
-import squareRobotNew from "@/utils/squareRobot";
+import CanvasRobot from "@/components/CanvasRobot";
+import { squareRobotNew } from "@/utils/squareRobot";
 import { GetStaticProps, GetStaticPaths } from "next";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 interface PostPageint {
   title: string;
@@ -32,6 +33,11 @@ export default function PostPage({
   slug: string;
 }) {
   const draw = useCallback(squareRobotNew, []);
+  const positionAndSize: positionAndSizeInt = {
+    x01: 0,
+    y01: 0,
+    scale: 1, // 1 === 100%
+  };
   return (
     <Layout title="Blog">
       <p className="ml-5">
@@ -53,7 +59,13 @@ export default function PostPage({
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
-            <CanvasRobot width={30} height={30} className="mx-2" draw={draw}>
+            <CanvasRobot
+              width={30}
+              height={30}
+              className="mx-2"
+              draw={draw}
+              positionAndSize={positionAndSize}
+            >
               <Image
                 src={author_image}
                 alt={author}

@@ -4,7 +4,8 @@ import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
 import { cutText } from "../utils/cutText";
 import CanvasRobot from "./CanvasRobot";
-import squareRobotNew from "@/utils/squareRobot";
+import { squareRobotNew } from "@/utils/squareRobot";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export interface PostsInt {
   slug: string;
@@ -28,6 +29,11 @@ export default function Post({
   onClick?: (e: any) => void;
 }) {
   const draw = useCallback(squareRobotNew, []);
+  const positionAndSize: positionAndSizeInt = {
+    x01: 0,
+    y01: 0,
+    scale: 1, // 1 === 100%
+  };
   return (
     <div className="w-full px-10 py-6 bg-white rounded-lg shadow-md mt-6">
       {!compact && (
@@ -69,7 +75,13 @@ export default function Post({
             Read more
           </Link>
           <div className="flex items-center">
-            <CanvasRobot width={30} height={30} className="mx-2" draw={draw}>
+            <CanvasRobot
+              width={30}
+              height={30}
+              className="mx-2"
+              draw={draw}
+              positionAndSize={positionAndSize}
+            >
               <Image
                 src={post.frontmatter.author_image}
                 alt={post.frontmatter.author}

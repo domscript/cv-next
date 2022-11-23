@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import useCanvas from "hooks/use-canvas";
+import React from "react";
+import useCanvas, { positionAndSizeInt } from "hooks/use-canvas";
 
 export interface CanvasRobotProps {
   children: React.ReactNode;
@@ -9,16 +9,15 @@ export interface CanvasRobotProps {
   draw: (
     context: CanvasRenderingContext2D,
     frameCount: number,
-    scale: number,
-    x01: number,
-    y01: number
+    positionAndSize: positionAndSizeInt
   ) => void;
+  positionAndSize: positionAndSizeInt;
 }
 
 const CanvasRobot = (props: CanvasRobotProps): JSX.Element => {
-  const { draw, ...rest } = props;
+  const { draw, positionAndSize, ...rest } = props;
 
-  const canvasRef = useCanvas(draw);
+  const canvasRef = useCanvas(draw, positionAndSize);
 
   return <canvas ref={canvasRef} {...rest} />;
 };

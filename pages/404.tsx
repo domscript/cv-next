@@ -1,16 +1,28 @@
 import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Layout from "../components/Layout";
-import CanvasRobot from "../components/CanvasRobot";
-import squareRobotNew from "@/utils/squareRobot";
+import Layout from "@/components/Layout";
+import CanvasRobot from "@/components/CanvasRobot";
+import { squareRobotNew } from "@/utils/squareRobot";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export default function NotFoundPage() {
   const draw = useCallback(squareRobotNew, []);
+  const positionAndSize: positionAndSizeInt = {
+    x01: 0,
+    y01: 0,
+    scale: 1, // 1 === 100%
+  };
   return (
     <Layout title="Error">
       <div className="flex flex-col items-center mt-20">
-        <CanvasRobot width={200} height={200} className="mx-auto" draw={draw}>
+        <CanvasRobot
+          width={200}
+          height={200}
+          className="mx-auto"
+          draw={draw}
+          positionAndSize={positionAndSize}
+        >
           <Image
             src="/image/c_lang.svg"
             alt=""

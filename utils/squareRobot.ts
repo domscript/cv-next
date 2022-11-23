@@ -1,11 +1,10 @@
-const squareRobotNew = (
+import { positionAndSizeInt } from "../hooks/use-canvas";
+export const squareRobotNew = (
   context: CanvasRenderingContext2D,
   frameCount: number,
-  scale: number,
-  x01: number,
-  y01: number
+  positionAndSize: positionAndSizeInt
 ) => {
-  function robotBody(x: number, y: number, y0: number, p: number) {
+  function robotBody(x: number, y01: number, y0: number, p: number) {
     // x, y - coord, size - size
     const height = context.canvas.height * scale;
     const widht = context.canvas.width * scale;
@@ -130,6 +129,7 @@ const squareRobotNew = (
     context.stroke();
     context.fill();
   }
+
   function heart(x: number, y: number, scale2: number) {
     const xHeart = x + scale2 * 1.4,
       yHeart = y / 2 + scale2;
@@ -149,6 +149,8 @@ const squareRobotNew = (
     context.fill();
     context.stroke();
   }
+
+  const { x01, y01, scale } = positionAndSize;
   let p = 0,
     sign = frameCount;
   const x = (context.canvas.width / 2) * scale + x01,
@@ -165,8 +167,6 @@ const squareRobotNew = (
   const scale10 =
     (size / 10) *
     (1 + 0.3 * Math.sin(Math.PI * p) * Math.cos(Math.PI * p) ** 2);
-  robotBody(x, y, y0, legsArms);
+  robotBody(x, y01, y0, legsArms);
   heart((x - x01) * 1.2 + x01, y + y01, scale10 / 1.5);
 };
-
-export default squareRobotNew;

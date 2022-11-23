@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import dateFormatter from "../../utils/dateFormatter";
+import { dateFormatter } from "@/utils/dateFormatter";
 
 export default function handler(req, res) {
   let posts;

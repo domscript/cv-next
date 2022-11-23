@@ -2,11 +2,17 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import CanvasRobot from "./CanvasRobot";
-import squareRobotNew from "@/utils/squareRobot";
+import { squareRobotNew } from "@/utils/squareRobot";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export default function Header(props: { className: string }) {
   const styles = `bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 text-lime-300 font-bold shadow w-full ${props.className}`;
   const draw = useCallback(squareRobotNew, []);
+  const positionAndSize: positionAndSizeInt = {
+    x01: 0,
+    y01: 0,
+    scale: 1, // 1 === 100%
+  };
 
   return (
     <header className={styles}>
@@ -15,7 +21,13 @@ export default function Header(props: { className: string }) {
           href="/"
           className="flex flex-nowrap hover:opacity-60 md:w-1/5 title-font font-medium items-center md:justify-start mb-4 md:mb-0"
         >
-          <CanvasRobot className="" width={80} height={80} draw={draw}>
+          <CanvasRobot
+            className=""
+            width={80}
+            height={80}
+            draw={draw}
+            positionAndSize={positionAndSize}
+          >
             <Image src="/favicon.ico" width={60} height={60} alt="logo" />{" "}
           </CanvasRobot>
           <span className="ml-3 text-xl whitespace-nowrap">Domscript</span>

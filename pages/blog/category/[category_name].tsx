@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import Layout from "../../../components/Layout";
-import Post, { PostsInt } from "../../../components/Post";
-import CategoryList from "../../../components/CategoryList";
+import Layout from "@/components/Layout";
+import Post, { PostsInt } from "@/components/Post";
+import CategoryList from "@/components/CategoryList";
 const matter = require("gray-matter");
-import { getPosts } from "../../../lib/posts";
-import dateFormatter from "../../../utils/dateFormatter";
+import { getPosts } from "@/lib/posts";
+import { dateFormatter } from "@/utils/dateFormatter";
 
 export default function CategoryBlogPage({
   posts,

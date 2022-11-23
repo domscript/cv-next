@@ -22,7 +22,8 @@
       "@/styles/*": ["styles/*"],
       "@/components/*": ["components/*"],
       "@/config/*": ["config/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/hooks/*": ["hooks/*"]
     },
     "plugins": [
       {

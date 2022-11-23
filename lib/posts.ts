@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 const matter = require("gray-matter");
 import { sortPostsByDate } from "../utils/sortPostsByDate";
-import dateFormatter from "../utils/dateFormatter";
+import { dateFormatter } from "../utils/dateFormatter";
 
 const files = fs.readdirSync(path.join("posts"));
 

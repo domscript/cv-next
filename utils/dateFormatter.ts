@@ -1,4 +1,4 @@
-export default new Intl.DateTimeFormat(undefined, {
+export const dateFormatter = new Intl.DateTimeFormat(undefined, {
   timeZone: "UTC",
   month: "short",
   year: "numeric",
