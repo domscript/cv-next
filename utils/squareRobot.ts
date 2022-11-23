@@ -4,7 +4,13 @@ export const squareRobotNew = (
   frameCount: number,
   positionAndSize: positionAndSizeInt
 ) => {
-  function robotBody(x: number, y01: number, y0: number, p: number) {
+  function robotBody(
+    x: number,
+    y01: number,
+    y0: number,
+    legsArms: number,
+    p: number
+  ) {
     // x, y - coord, size - size
     const height = context.canvas.height * scale;
     const widht = context.canvas.width * scale;
@@ -38,53 +44,53 @@ export const squareRobotNew = (
     // leg from right
     context.moveTo(
       x - widhtBody / 5,
-      heightBody + heightHead + heightNeck + heightEars - p + y01
+      heightBody + heightHead + heightNeck + heightEars - legsArms + y01
     );
     context.rect(
       x + widhtBody / 5,
-      heightBody + heightHead + heightNeck + heightEars - p + y01,
+      heightBody + heightHead + heightNeck + heightEars - legsArms + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // leg from left
     context.moveTo(
       x + widhtBody / 2.5,
-      heightHead + heightNeck + heightEars + p - y0 + y01
+      heightHead + heightNeck + heightEars + legsArms - y0 + y01
     );
     context.rect(
       x - widhtBody / 2.5,
-      heightBody + heightHead + heightNeck + heightEars + p - y0 + y01,
+      heightBody + heightHead + heightNeck + heightEars + legsArms - y0 + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // arm from right
-    context.moveTo(x + widhtBody / 2, heightHead + heightNeck - p + y01);
+    context.moveTo(x + widhtBody / 2, heightHead + heightNeck - legsArms + y01);
     context.rect(
       x + widhtBody / 2,
-      heightHead + heightNeck + heightEars - p + y01,
+      heightHead + heightNeck + heightEars - legsArms + y01,
       widhtBody / 5,
       heightBody / 5
     );
     // arm from left
-    context.moveTo(x + widhtBody / 2, heightHead + heightNeck + p + y01);
+    context.moveTo(x + widhtBody / 2, heightHead + heightNeck + legsArms + y01);
     context.rect(
       x - widhtBody / 2,
-      heightHead + heightNeck + heightEars - p + y01,
+      heightHead + heightNeck + heightEars - legsArms + y01,
       -widhtBody / 5,
       heightBody / 5
     );
     // ear from left
-    context.moveTo(x - widhtHead / 4 + p / 2, y01);
+    context.moveTo(x - widhtHead / 4 + legsArms / 2, y01);
     context.rect(
-      x - widhtHead / 4 + p / 2,
+      x - widhtHead / 4 + legsArms / 2,
       y01,
       widhtBody / 10,
       heightBody / 5
     );
     // ear from right
-    context.moveTo(x + widhtHead / 4 + p / 2, y01);
+    context.moveTo(x + widhtHead / 4 + legsArms / 2, y01);
     context.rect(
-      x + widhtHead / 4 + p / 2,
+      x + widhtHead / 4 + legsArms / 2,
       y01,
       widhtBody / 10,
       heightBody / 5
@@ -97,16 +103,16 @@ export const squareRobotNew = (
     context.fillStyle = "black";
     context.rect(
       x - widhtHead / 3,
-      heightHead / 7 + heightEars + y0 / 4 - p / 4 + y01,
+      heightHead / 7 + heightEars + y0 / 4 - legsArms / 4 + y01,
       widhtHead / 5,
-      heightHead / 7 + p / 4 - y0 / 4
+      heightHead / 7 + legsArms / 4 - y0 / 4
     );
     context.moveTo(x + widhtHead / 3, heightHead / 3 + y01);
     context.rect(
       x + widhtHead / 3,
-      heightHead / 7 + heightEars + y0 / 4 - p / 4 + y01,
+      heightHead / 7 + heightEars + y0 / 4 - legsArms / 4 + y01,
       -widhtHead / 5,
-      heightHead / 7 + p / 4 - y0 / 4
+      heightHead / 7 + legsArms / 4 - y0 / 4
     );
     context.fill();
     //mouth
@@ -114,16 +120,16 @@ export const squareRobotNew = (
     context.strokeStyle = "black";
     context.fillStyle = "white";
     context.rect(
-      x - ((widhtHead / 5) * p) / 12,
+      x - (widhtHead / 5) * p,
       heightHead / 1.5 + heightEars + y01,
-      ((widhtHead / 5) * p) / 12,
+      (widhtHead / 5) * p,
       heightHead / 8
     );
     context.moveTo(x + ((widhtHead / 5) * p) / 12, heightHead / 1.5 + y01);
     context.rect(
-      x + ((widhtHead / 5) * p) / 12,
+      x + (widhtHead / 5) * p,
       heightHead / 1.5 + heightEars + y01,
-      ((-widhtHead / 5) * p) / 12,
+      (-widhtHead / 5) * p,
       heightHead / 8
     );
     context.stroke();
@@ -167,6 +173,6 @@ export const squareRobotNew = (
   const scale10 =
     (size / 10) *
     (1 + 0.3 * Math.sin(Math.PI * p) * Math.cos(Math.PI * p) ** 2);
-  robotBody(x, y01, y0, legsArms);
+  robotBody(x, y01, y0, legsArms, p);
   heart((x - x01) * 1.2 + x01, y + y01, scale10 / 1.5);
 };

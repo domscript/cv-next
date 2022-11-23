@@ -11,7 +11,9 @@ const useCanvas = (
     frameCount: number,
     positionAndSize: positionAndSizeInt
   ) => void,
-  positionAndSize: positionAndSizeInt
+  positionAndSize: positionAndSizeInt,
+  width: number,
+  height: number
 ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -19,6 +21,13 @@ const useCanvas = (
     if (canvas === null) return;
     const context = canvas.getContext("2d");
     if (context === null) return;
+    const scale = () => {
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+    };
     let frameCount = 0;
     let newCount = 0;
     let animationFrameID: number;
@@ -28,12 +37,13 @@ const useCanvas = (
       frameCount = frameCount % 200;
       if (frameCount > 100) newCount = 200 - frameCount;
       if (frameCount <= 100) newCount = frameCount;
+      scale();
       draw(context, newCount, positionAndSize);
       animationFrameID = window.requestAnimationFrame(render);
     };
     render();
     return () => window.cancelAnimationFrame(animationFrameID);
-  }, [draw, positionAndSize]);
+  }, [draw, positionAndSize, height, width]);
   return canvasRef;
 };
 

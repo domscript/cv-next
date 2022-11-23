@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useCanvas, { positionAndSizeInt } from "hooks/use-canvas";
 
 export interface CanvasRobotProps {
@@ -15,11 +15,17 @@ export interface CanvasRobotProps {
 }
 
 const CanvasRobot = (props: CanvasRobotProps): JSX.Element => {
-  const { draw, positionAndSize, ...rest } = props;
+  const { draw, positionAndSize, width, height, ...rest } = props;
 
-  const canvasRef = useCanvas(draw, positionAndSize);
-
-  return <canvas ref={canvasRef} {...rest} />;
+  const canvasRef = useCanvas(draw, positionAndSize, width, height);
+  return (
+    <canvas
+      ref={canvasRef}
+      width={`${width}px`}
+      height={`${height}px`}
+      {...rest}
+    />
+  );
 };
 
 export default CanvasRobot;
