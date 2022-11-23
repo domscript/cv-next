@@ -47,7 +47,7 @@ import {
   wheell,
   sorrt,
 } from "../utils/pathsSVG";
-import { me, plant, belongings } from "../utils/pathsSVG";
+import { me, plant, belongings, room } from "../utils/pathsSVG";
 
 interface HomeInt {
   title: string;
@@ -81,7 +81,7 @@ export default function Home({
   const dataSVGtool = [Webpack, NodeJS, TailwindCSS, vsCode, git];
   const dataSVGlangSpeak = [English, Espanol, Deutsch];
 
-  const roomSVG = [me, plant, belongings];
+  const roomSVG = [room, me, plant, belongings];
   const dataMain = [lang, JavaScript, git, TypeScript];
 
   const buttonDataHandler = useCallback((buttonClick: string): void => {

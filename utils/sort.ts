@@ -16,7 +16,8 @@ export interface Moves {
 export default function sort(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  data: CanvasProps["data"] = []
+  data: CanvasProps["data"] = [],
+  scale: () => number
 ) {
   const myButtons = canvas.getElementsByClassName("myButtons")[0];
   const margin = 30;
@@ -24,6 +25,7 @@ export default function sort(
   const buttons: Button[] = [];
   const buttonsNum = myButtons.children.length;
   const buttonSpacing = (canvas.width - margin * 2) / buttonsNum;
+  const ratio = scale();
 
   for (let j = 0; j < buttonsNum; j++) {
     const el = myButtons.children[j] as HTMLElement;
@@ -65,7 +67,7 @@ export default function sort(
   init();
 
   canvas.addEventListener("pointerdown", (e: PointerEvent) => {
-    switch (handleClick(e)) {
+    switch (handleClick(e).sort) {
       case "bubble":
         bubble();
         break;
@@ -90,15 +92,18 @@ export default function sort(
     const { height, width, top } = canvas.getBoundingClientRect();
     const x = e.clientX - canvas.offsetLeft;
     const y = e.clientY - top;
-
+    const canvasW = width;
+    const canvasH = height;
+    // return ;
+    // }
     // Focus button1, if appropriate
     for (let j = 0; j < buttons.length; j++) {
       buttons[j].draw(context);
-      if (context.isPointInPath(x, y)) {
+      if (context.isPointInPath(x * ratio, y * ratio)) {
         sort = buttons[j].el.dataset.sort;
       }
     }
-    return sort;
+    return { x, y, canvasW, canvasH, sort };
   }
 
   // function setAmount() {
