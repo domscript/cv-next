@@ -18,8 +18,16 @@ const CanvasWheel = (props: CanvasPropsWheel): JSX.Element => {
     if (canvas === null) return;
     const context = canvas.getContext("2d");
     if (context === null) return;
+    const scale = () => {
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = Math.floor(props.width * ratio);
+      canvas.height = Math.floor(props.height * ratio);
+      canvas.style.width = props.width + "px";
+      canvas.style.height = props.height + "px";
+    };
+    scale();
     wheel(canvas, context, props.data);
-  }, [props.data]);
+  }, [props.data, props.width, props.height]);
 
   return (
     <canvas
