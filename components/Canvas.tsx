@@ -136,23 +136,23 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     count;
     // context.beginPath();
     roomData[0].coords = {
-      x: 1,
-      y: 1,
-      zoom: 2.4,
+      x: 0,
+      y: 0,
+      zoom: 1,
     };
     roomData[1].coords = {
-      x: 150 * 2,
-      y: 255 * 2,
+      x: 150 * ratio,
+      y: 255 * ratio,
       zoom: 1,
     };
     roomData[2].coords = {
-      x: 80,
-      y: 370 * 2,
+      x: 40 * ratio,
+      y: 370 * ratio,
       zoom: 0.5,
     };
     roomData[3].coords = {
-      x: 160 * 2,
-      y: 290 * 2,
+      x: 160 * ratio,
+      y: 290 * ratio,
       zoom: 1,
     };
 
@@ -178,7 +178,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       canvasW: context.canvas.width,
       canvasH: context.canvas.height,
     };
-    const [x, y] = [0, 0];
     homeObjects[0] = new Room(0, 0, coordsRoom.canvasW, coordsRoom.canvasH, [
       roomData[0],
     ]);
@@ -200,8 +199,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     }
     for (let i = 0; i < amoutHome; i++) {
       const el = homeButtons.children[i] as HTMLElement;
-      const x = spacing / 2 + margin;
-      const y = context.canvas.height * 0.1 + i * (buttonHeight + gap);
+      const x = (spacing / 2 + margin) * ratio;
+      const y =
+        (context.canvas.height * 0.1 + i * (buttonHeight + gap)) * ratio;
       const width = spacing - gap;
       const height = buttonHeight / 3;
       pageButton[i] = new Button(x, y, width, height, el);
