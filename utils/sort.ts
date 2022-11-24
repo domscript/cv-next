@@ -6,7 +6,6 @@ import { selectionSort } from "./algorithms/selectionSort";
 import { selectionSortBack } from "./algorithms/selectionSortBack";
 import { insertionSort } from "./algorithms/insertionSort";
 import { CanvasProps } from "@/components/Canvas";
-import DataSVG from "./pathsSVG";
 
 export interface Moves {
   indices: [number, number];
@@ -37,7 +36,6 @@ export default function sort(
     buttons[j].draw(context, ratio);
   }
   let amount = data.length;
-  // let speed;
   const maxColumnHeight = canvas.height * 0.5;
   let array: number[] = [];
   let cols: Column[] = [];
@@ -45,8 +43,7 @@ export default function sort(
   function init() {
     array = [];
     cols = [];
-    // amount = setAmount();
-    // speed = setSpeed();
+
     const grow = (canvas.height * 0.2) / amount;
 
     const spacing = (canvas.width - margin * 2) / amount;
@@ -68,20 +65,22 @@ export default function sort(
 
   canvas.addEventListener("pointerdown", (e: PointerEvent) => {
     switch (handleClick(e).sort) {
+      case handleClick(e).sort:
+        init();
       case "bubble":
-        bubble();
+        moves = bubbleSort(array);
         break;
       case "bubbleBack":
-        bubbleBack();
+        moves = bubbleSortBack(array);
         break;
       case "selection":
-        selection();
+        moves = selectionSort(array);
         break;
       case "selectionBack":
-        selectionBack();
+        moves = selectionSortBack(array);
         break;
       case "insertion":
-        insertion();
+        moves = insertionSort(array);
         break;
     }
   });
@@ -94,8 +93,6 @@ export default function sort(
     const y = e.clientY - top;
     const canvasW = width;
     const canvasH = height;
-    // return ;
-    // }
     // Focus button1, if appropriate
     for (let j = 0; j < buttons.length; j++) {
       buttons[j].draw(context, ratio);
@@ -104,34 +101,6 @@ export default function sort(
       }
     }
     return { x, y, canvasW, canvasH, sort };
-  }
-
-  // function setAmount() {
-  //   return document.getElementById("amount").value;
-  // }
-  // function setSpeed() {
-  //   return document.getElementById("speed").value;
-  // }
-
-  function bubble() {
-    init();
-    moves = bubbleSort(array);
-  }
-  function bubbleBack() {
-    init();
-    moves = bubbleSortBack(array);
-  }
-  function insertion() {
-    init();
-    moves = insertionSort(array);
-  }
-  function selection() {
-    init();
-    moves = selectionSort(array);
-  }
-  function selectionBack() {
-    init();
-    moves = selectionSortBack(array);
   }
 
   animate();
@@ -154,27 +123,6 @@ export default function sort(
       if (move) {
         const [i, j] = move.indices;
         if (move.swap) {
-          // switch (speed) {
-          //   case "1":
-          //     frameCount = 100;
-          //     break;
-          //   case "2":
-          //     frameCount = 50;
-          //     break;
-          //   case "3":
-          //     frameCount = 20;
-          //     break;
-          //   case "4":
-          //     frameCount = 10;
-          //     break;
-          //   case "5":
-          //     frameCount = 1;
-          //     break;
-          //   default:
-          //     frameCount = 25;
-          //     break;
-          // }
-
           cols[i].moveTo(cols[j], 1, frameCount);
           cols[j].moveTo(cols[i], -1, frameCount);
           [cols[i], cols[j]] = [cols[j], cols[i]];

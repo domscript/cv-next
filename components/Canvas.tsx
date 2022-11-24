@@ -57,20 +57,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             y01: 380 * ratio,
             scale: 0.2, // 1 === 100%
           };
-          // const positionAndSize2 = {
-          //   x01: (100 * ratio * newCount) / 100,
-          //   y01: 200 * ratio,
-          //   scale: 0.2, // 1 === 100%
-          // };
+
           header(context, newCount, props.data, scale);
           squareRobotNew(context, newCount, positionAndSize);
-          // squareRobotNew(context, newCount, positionAndSize2);
           animationFrameID = window.requestAnimationFrame(render);
         };
         render();
         return () => window.cancelAnimationFrame(animationFrameID);
-
-        break;
       default:
         break;
     }
@@ -125,16 +118,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           buttons[j].el.className = "btn active";
         }
       }
-      // pageButton[0].draw(context);
-      // if (context.isPointInPath(x, y)) {
-      //   const page = pageButton[0].el.dataset.page as string;
-      //   // console.log(page);
-      // }
     }
     const roomObjects: Room[] = [];
     const homeObjects: Me[] = [];
     count;
-    // context.beginPath();
     roomData[0].coords = {
       x: 0,
       y: 0,
@@ -178,10 +165,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       canvasW: context.canvas.width,
       canvasH: context.canvas.height,
     };
-    homeObjects[0] = new Room(0, 0, coordsRoom.canvasW, coordsRoom.canvasH, [
+    roomObjects[0] = new Room(0, 0, coordsRoom.canvasW, coordsRoom.canvasH, [
       roomData[0],
     ]);
-    homeObjects[0].draw(context, coordsRoom);
+    roomObjects[0].draw(context, coordsRoom);
 
     for (let i = 1; i < roomData.length; i++) {
       const [x, y] = [0, 0];
@@ -205,8 +192,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       const width = spacing - gap;
       const height = buttonHeight / 3;
       pageButton[i] = new Button(x, y, width, height, el);
-      // pageButton[i].draw(context);
-      // }
     }
   }
   return (

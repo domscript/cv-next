@@ -146,14 +146,6 @@ export function wheel(
     return { x, y, canvasW, canvasH };
   }
 
-  function redraw() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < sectors.length; i++) {
-      sectors[i].draw(context, colors[i], coords, ratio);
-      sectors[i].rotateTo(sectors[i]);
-    }
-  }
-
   animate();
 
   function animate() {

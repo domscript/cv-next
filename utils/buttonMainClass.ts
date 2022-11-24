@@ -1,11 +1,5 @@
 import DataSVG from "./pathsSVG";
 export class ButtonMainClass {
-  // x: number;
-  // y: number;
-  // width: number;
-  // height: number;
-  // data: DataSVG;
-  // el: HTMLElement;
   constructor(
     public x: number,
     public y: number,
@@ -13,38 +7,12 @@ export class ButtonMainClass {
     public height: number,
     public data: DataSVG,
     public el: HTMLElement
-  ) {
-    // this.x = x;
-    // this.y = y;
-    // this.width = width;
-    // this.height = height;
-    // this.data = data;
-    // this.el = el;
-  }
-
-  // moveTo(loc, yOffset = 1, frameCount = 20) {
-  //   // frameCount always should be Int round Up
-  //   // it makes this func independent from outside
-  //   frameCount = Math.ceil(frameCount);
-  //   for (let i = 1; i <= frameCount; i++) {
-  //     const t = i / frameCount;
-  //     const u = Math.sin(t * Math.PI);
-  //     this.queue.push({
-  //       x: lerp(this.x, loc.x, t),
-  //       y: lerp(this.y, loc.y, t) + ((u * this.width) / 3) * yOffset,
-  //     });
-  //   }
-  // }
+  ) {}
 
   draw(context: CanvasRenderingContext2D) {
     const data = this.data;
     let changed = false;
-    // if (this.queue.length > 0) {
-    //   const { x, y } = this.queue.shift();
-    //   this.x = x;
-    //   this.y = y;
-    //   changed = true;
-    // }
+
     const left = this.x - this.width / 2;
     const top = this.y - this.height;
     const right = this.x + this.width / 2;
@@ -56,10 +24,8 @@ export class ButtonMainClass {
     context.fillStyle = data.detail[0].fill;
     context.moveTo(left, top);
     context.lineTo(left, this.y);
-    // context.lineTo(center, this.y + height / 6);
     context.lineTo(right, this.y);
     context.lineTo(right, top);
-    // context.lineTo(center, top);
     context.lineTo(left, top);
     context.fill();
     context.stroke();
@@ -93,7 +59,6 @@ export class ButtonMainClass {
         );
 
       p.addPath(p1, t);
-      // context.stroke(p);
       context.fill(p);
     }
     return changed;

@@ -3,7 +3,6 @@ import BaseHead from "./BaseHead";
 import Footer from "./Footer";
 import Header from "./Header";
 import Search from "./Search";
-import styles from "@/styles/Home.module.css";
 
 interface LayoutInt {
   title: string;
