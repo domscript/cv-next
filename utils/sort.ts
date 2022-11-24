@@ -5,7 +5,7 @@ import { bubbleSortBack } from "./algorithms/bubbleSortBack";
 import { selectionSort } from "./algorithms/selectionSort";
 import { selectionSortBack } from "./algorithms/selectionSortBack";
 import { insertionSort } from "./algorithms/insertionSort";
-import { CanvasProps } from "../components/Canvas";
+import { CanvasProps } from "@/components/Canvas";
 import DataSVG from "./pathsSVG";
 
 export interface Moves {

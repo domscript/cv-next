@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import Layout from "../components/Layout";
+import Layout from "@/components/Layout";
 import Image from "next/image";
-import CanvasRobot from "../components/CanvasRobot";
+import CanvasRobot from "@/components/CanvasRobot";
 import { squareRobotNew } from "@/utils/squareRobot";
 import { positionAndSizeInt } from "@/hooks/use-canvas";
 

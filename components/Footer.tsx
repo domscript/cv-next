@@ -1,5 +1,5 @@
 import LinkButton from "./LinkButton";
-import { contacts } from "../utils/contacts";
+import { contacts } from "@/utils/contacts";
 
 const Footer = (props: { className: string }): JSX.Element => {
   const styles = `flex flex-col text-slate-700 text-center ${props.className}`;

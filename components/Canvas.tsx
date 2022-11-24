@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
-import DataSVG from "../utils/pathsSVG";
-import sort from "../utils/sort";
-import { Room } from "../utils/room";
-import { ButtonMainClass } from "../utils/buttonMainClass";
-import { Button } from "../utils/button";
-import { Me } from "../utils/me";
+import DataSVG from "@/utils/pathsSVG";
+import sort from "@/utils/sort";
+import { Room } from "@/utils/room";
+import { ButtonMainClass } from "@/utils/buttonMainClass";
+import { Button } from "@/utils/button";
+import { Me } from "@/utils/me";
 import { squareRobotNew } from "@/utils/squareRobot";
 
 export interface CanvasProps {
@@ -37,7 +37,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         scale();
         sort(canvas, context, props.data, scale);
         break;
-      case "room":
+      // case "room":
       //   // scale();
       //   // room(canvas, context, props.data);
       //   break;

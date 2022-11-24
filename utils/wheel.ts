@@ -1,5 +1,5 @@
 import { Sector } from "./sector";
-import { CanvasPropsWheel } from "../components/CanvasWheel";
+import { CanvasPropsWheel } from "@/components/CanvasWheel";
 
 export interface cardsSrcInt {
   group: string;
@@ -13,7 +13,7 @@ export interface cardsSrcInt {
   }[];
 }
 
-export default function sort(
+export function wheel(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
   data: CanvasPropsWheel["data"] = [],

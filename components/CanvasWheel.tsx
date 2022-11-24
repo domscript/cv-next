@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import DataSVG from "../utils/pathsSVG";
-import wheel from "../utils/wheel";
+import DataSVG from "@/utils/pathsSVG";
+import { wheel } from "@/utils/wheel";
 
 export interface CanvasPropsWheel {
   children: React.ReactNode;
@@ -12,6 +12,7 @@ export interface CanvasPropsWheel {
 }
 
 const CanvasWheel = (props: CanvasPropsWheel): JSX.Element => {
+  const { data, width, height, ...rest } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,25 +21,23 @@ const CanvasWheel = (props: CanvasPropsWheel): JSX.Element => {
     if (context === null) return;
     const scale = () => {
       const ratio = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(props.width * ratio);
-      canvas.height = Math.floor(props.height * ratio);
-      canvas.style.width = props.width + "px";
-      canvas.style.height = props.height + "px";
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
       return ratio;
     };
     const ratio = scale();
-    wheel(canvas, context, props.data, ratio);
-  }, [props.data, props.width, props.height]);
+    wheel(canvas, context, data, ratio);
+  }, [data, width, height]);
 
   return (
     <canvas
       ref={canvasRef}
-      className={props.className}
       width={props.width}
       height={props.height}
-    >
-      {props.children}
-    </canvas>
+      {...rest}
+    />
   );
 };
 

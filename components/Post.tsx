@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
-import { cutText } from "../utils/cutText";
+import { cutText } from "@/utils/cutText";
 import CanvasRobot from "./CanvasRobot";
 import { squareRobotNew } from "@/utils/squareRobot";
 import { positionAndSizeInt } from "@/hooks/use-canvas";

@@ -1,4 +1,4 @@
-import { positionAndSizeInt } from "../hooks/use-canvas";
+import { positionAndSizeInt } from "@/hooks/use-canvas";
 export const squareRobotNew = (
   context: CanvasRenderingContext2D,
   frameCount: number,

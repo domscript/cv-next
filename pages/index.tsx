@@ -1,12 +1,12 @@
 import { useCallback, useState, useMemo } from "react";
 import Head from "next/head";
-import BaseHead from "../components/BaseHead";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import BaseHead from "@/components/BaseHead";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
-import Canvas from "../components/Canvas";
-import CanvasWheel from "../components/CanvasWheel";
+import styles from "@/styles/Home.module.css";
+import Canvas from "@/components/Canvas";
+import CanvasWheel from "@/components/CanvasWheel";
 import {
   html5,
   JavaScript,
@@ -27,7 +27,7 @@ import {
   Deutsch,
   CardHeart,
   CardClub,
-} from "../utils/pathsSVG";
+} from "@/utils/pathsSVG";
 import {
   Events,
   Apps,
@@ -46,8 +46,8 @@ import {
   ContactCenter,
   wheell,
   sorrt,
-} from "../utils/pathsSVG";
-import { me, plant, belongings, room } from "../utils/pathsSVG";
+} from "@/utils/pathsSVG";
+import { me, plant, belongings, room } from "@/utils/pathsSVG";
 
 interface HomeInt {
   title: string;

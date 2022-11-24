@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
-import Layout from "../../../components/Layout";
-import Post, { PostsInt } from "../../../components/Post";
-import Pagination from "../../../components/Pagination";
-import CategoryList from "../../../components/CategoryList";
-import { POSTS_PER_PAGE } from "../../../config/index";
-import { getPosts } from "../../../lib/posts";
+import Layout from "@/components/Layout";
+import Post, { PostsInt } from "@/components/Post";
+import Pagination from "@/components/Pagination";
+import CategoryList from "@/components/CategoryList";
+import { POSTS_PER_PAGE } from "@/config/index";
+import { getPosts } from "@/lib/posts";
 
 export default function BlogPage({
   posts,

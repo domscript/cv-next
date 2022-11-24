@@ -1,4 +1,4 @@
-import { CanvasProps } from "../components/Canvas";
+import { CanvasProps } from "@/components/Canvas";
 
 export class Room {
   constructor(
