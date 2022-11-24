@@ -85,7 +85,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     const ratio = scale();
     const myButtons = context.canvas.getElementsByClassName("myButtons")[0];
     const homeButtons = context.canvas.getElementsByClassName("homeButtons")[0];
-    const margin = 360 * 2;
+    const margin = 360 * ratio;
     let p = 0;
     p = p + 0.01 * count;
 

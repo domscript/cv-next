@@ -34,7 +34,7 @@ export default function sort(
     const width = buttonSpacing - buttonsGap;
     const height = canvas.height * 0.08;
     buttons[j] = new Button(x, y, width, height, el);
-    buttons[j].draw(context);
+    buttons[j].draw(context, ratio);
   }
   let amount = data.length;
   // let speed;
@@ -98,7 +98,7 @@ export default function sort(
     // }
     // Focus button1, if appropriate
     for (let j = 0; j < buttons.length; j++) {
-      buttons[j].draw(context);
+      buttons[j].draw(context, ratio);
       if (context.isPointInPath(x * ratio, y * ratio)) {
         sort = buttons[j].el.dataset.sort;
       }
@@ -142,7 +142,7 @@ export default function sort(
     let frameCount;
 
     for (let j = 0; j < buttons.length; j++) {
-      buttons[j].draw(context);
+      buttons[j].draw(context, ratio);
     }
 
     for (let i = 0; i < cols.length; i++) {

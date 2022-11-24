@@ -24,9 +24,10 @@ const CanvasWheel = (props: CanvasPropsWheel): JSX.Element => {
       canvas.height = Math.floor(props.height * ratio);
       canvas.style.width = props.width + "px";
       canvas.style.height = props.height + "px";
+      return ratio;
     };
-    scale();
-    wheel(canvas, context, props.data);
+    const ratio = scale();
+    wheel(canvas, context, props.data, ratio);
   }, [props.data, props.width, props.height]);
 
   return (

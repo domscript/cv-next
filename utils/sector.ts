@@ -32,7 +32,8 @@ export class Sector {
       y: number;
       canvasW: number;
       canvasH: number;
-    }
+    },
+    ratio: number
   ) {
     const angleS = this.angleStart;
     const angleE = this.angle;
@@ -76,7 +77,7 @@ export class Sector {
     context.stroke();
 
     context.fillStyle = color[0];
-    context.font = "1rem Arial monospace";
+    context.font = `${0.75 * ratio}rem Arial monospace`;
     context.textBaseline = "middle";
     context.textAlign = "center";
 
@@ -111,7 +112,7 @@ export class Sector {
       (coords.y * this.radius * 2) / coords.canvasH,
     ];
     for (let i = 1; i <= this.icons; i++) {
-      context.font = "0.75rem Arial";
+      context.font = `${0.6 * ratio}rem Arial`;
       context.textBaseline = "middle";
       context.textAlign = "center";
       const angDDD = lerp(angleS, angleE, i / (this.icons + 1));

@@ -16,7 +16,8 @@ export interface cardsSrcInt {
 export default function sort(
   canvas: HTMLCanvasElement,
   context: CanvasRenderingContext2D,
-  data: CanvasPropsWheel["data"] = []
+  data: CanvasPropsWheel["data"] = [],
+  ratio: number
 ) {
   if (data.length <= 0) return;
   const newData = data
@@ -105,7 +106,7 @@ export default function sort(
         cardsSrc[i].lines.length,
         cardsSrc[i]
       );
-      sectors[i].draw(context, colors[i], coords);
+      sectors[i].draw(context, colors[i], coords, ratio);
     }
   }
 
@@ -129,7 +130,7 @@ export default function sort(
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < sectors.length; i++) {
-        sectors[i].draw(context, colors[i], coords);
+        sectors[i].draw(context, colors[i], coords, ratio);
       }
     },
     false
@@ -148,7 +149,7 @@ export default function sort(
   function redraw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < sectors.length; i++) {
-      sectors[i].draw(context, colors[i], coords);
+      sectors[i].draw(context, colors[i], coords, ratio);
       sectors[i].rotateTo(sectors[i]);
     }
   }
@@ -171,7 +172,7 @@ export default function sort(
       canvas.height
     );
     for (let i = 0; i < sectors.length; i++) {
-      sectors[i].draw(context, colors[i], coords);
+      sectors[i].draw(context, colors[i], coords, ratio);
       sectors[i].rotateTo(sectors[i]);
     }
     requestAnimationFrame(animate);

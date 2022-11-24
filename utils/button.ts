@@ -7,7 +7,7 @@ export class Button {
     public el: HTMLElement
   ) {}
 
-  draw(context: CanvasRenderingContext2D) {
+  draw(context: CanvasRenderingContext2D, ratio: number) {
     const left = this.x - this.width / 2;
     const top = this.y - this.height;
     const right = this.x + this.width / 2;
@@ -22,7 +22,7 @@ export class Button {
 
     // Button text
     if (el.textContent) {
-      context.font = "15px sans-serif";
+      context.font = `${ratio * 12}px sans-serif`;
       context.textAlign = "center";
       context.textBaseline = "middle";
       context.fillStyle = "black";
