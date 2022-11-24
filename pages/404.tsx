@@ -20,8 +20,12 @@ export default function NotFoundPage() {
           width={200}
           height={200}
           className="mx-auto"
-          draw={draw}
-          positionAndSize={positionAndSize}
+          draw={[
+            {
+              draw,
+              positionAndSize,
+            },
+          ]}
         >
           <Image
             src="/image/c_lang.svg"

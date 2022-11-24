@@ -18,8 +18,12 @@ export default function AboutPage() {
         width={200}
         height={200}
         className="mx-auto"
-        draw={draw}
-        positionAndSize={positionAndSize}
+        draw={[
+          {
+            draw,
+            positionAndSize,
+          },
+        ]}
       >
         <Image
           src="/image/posts/undraw_powerful_re_frhr.svg"

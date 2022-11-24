@@ -6,16 +6,19 @@ export interface positionAndSizeInt {
 }
 
 const useCanvas = (
-  draw: (
-    context: CanvasRenderingContext2D,
-    frameCount: number,
-    positionAndSize: positionAndSizeInt
-  ) => void,
-  positionAndSize: positionAndSizeInt,
+  draw: {
+    draw: (
+      context: CanvasRenderingContext2D,
+      frameCount: number,
+      positionAndSize: positionAndSizeInt
+    ) => void;
+    positionAndSize: positionAndSizeInt;
+  }[],
   width: number,
   height: number
 ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (canvas === null) return;
@@ -38,12 +41,14 @@ const useCanvas = (
       if (frameCount > 100) newCount = 200 - frameCount;
       if (frameCount <= 100) newCount = frameCount;
       scale();
-      draw(context, newCount, positionAndSize);
+      for (let i = 0; i < draw.length; i++) {
+        draw[i].draw(context, newCount, draw[i].positionAndSize);
+      }
       animationFrameID = window.requestAnimationFrame(render);
     };
     render();
     return () => window.cancelAnimationFrame(animationFrameID);
-  }, [draw, positionAndSize, height, width]);
+  }, [draw, height, width]);
   return canvasRef;
 };
 

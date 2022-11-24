@@ -6,18 +6,19 @@ export interface CanvasRobotProps {
   className: string;
   width: number;
   height: number;
-  draw: (
-    context: CanvasRenderingContext2D,
-    frameCount: number,
-    positionAndSize: positionAndSizeInt
-  ) => void;
-  positionAndSize: positionAndSizeInt;
+  draw: {
+    draw: (
+      context: CanvasRenderingContext2D,
+      frameCount: number,
+      positionAndSize: positionAndSizeInt
+    ) => void;
+    positionAndSize: positionAndSizeInt;
+  }[];
 }
 
 const CanvasRobot = (props: CanvasRobotProps): JSX.Element => {
-  const { draw, positionAndSize, width, height, ...rest } = props;
-
-  const canvasRef = useCanvas(draw, positionAndSize, width, height);
+  const { draw, width, height, ...rest } = props;
+  const canvasRef = useCanvas(draw, width, height);
   return (
     <canvas
       ref={canvasRef}

@@ -7,13 +7,18 @@ import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export default function Header(props: { className: string }) {
   const styles = `bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 text-lime-300 font-bold shadow w-full ${props.className}`;
-  const draw = useCallback(squareRobotNew, []);
-  const positionAndSize: positionAndSizeInt = {
-    x01: 0,
-    y01: 0,
-    scale: 1, // 1 === 100%
-  };
-
+  // const positionAndSize0: positionAndSizeInt = {
+  //   x01: 0,
+  //   y01: 0,
+  //   scale: 1, // 1 === 100%
+  // };
+  // const positionAndSize1: positionAndSizeInt = {
+  //   x01: 0,
+  //   y01: 0,
+  //   scale: 1, // 1 === 100%
+  // };
+  // const draw0 = useCallback(squareRobotNew, []);
+  // const draw1 = useCallback(squareRobotNew, []);
   return (
     <header className={styles}>
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -25,8 +30,24 @@ export default function Header(props: { className: string }) {
             className=""
             width={80}
             height={80}
-            draw={draw}
-            positionAndSize={positionAndSize}
+            draw={[
+              {
+                draw: useCallback(squareRobotNew, []),
+                positionAndSize: {
+                  x01: 0,
+                  y01: 0,
+                  scale: 0.2, // 1 === 100%
+                },
+              },
+              {
+                draw: useCallback(squareRobotNew, []),
+                positionAndSize: {
+                  x01: 30,
+                  y01: 30,
+                  scale: 0.5, // 1 === 100%
+                },
+              },
+            ]}
           >
             <Image src="/favicon.ico" width={60} height={60} alt="logo" />{" "}
           </CanvasRobot>

@@ -79,8 +79,12 @@ export default function Post({
               width={30}
               height={30}
               className="mx-2"
-              draw={draw}
-              positionAndSize={positionAndSize}
+              draw={[
+                {
+                  draw,
+                  positionAndSize,
+                },
+              ]}
             >
               <Image
                 src={post.frontmatter.author_image}
