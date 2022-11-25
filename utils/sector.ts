@@ -143,6 +143,14 @@ export class Sector {
         iconY <= yClick &&
         yClick <= iconYCenter + sizeY / size / 2
       ) {
+        console.log(
+          iconX,
+          xClick,
+          iconXCenter + sizeX / size / 2,
+          iconY,
+          yClick,
+          iconYCenter + sizeY / size / 2
+        );
         coof = coof * 1.1;
         const pBig = new Path2D();
         const tBig = m

@@ -1,41 +1,26 @@
-import React, { useRef, useEffect, useState } from "react";
-import DataSVG from "@/utils/pathsSVG";
-import { wheel } from "@/utils/wheel";
+import React from "react";
+import useCanvasData from "hooks/use-canvas-data";
 
-export interface CanvasPropsWheel {
+export interface CanvasWheelProps {
   children: React.ReactNode;
   className: string;
   width: number;
   height: number;
-  data: DataSVG[];
-  onChangeData: (data: string) => void;
+  draw: ((
+    context: CanvasRenderingContext2D,
+    frameCount: number,
+    ratio: number
+  ) => void)[];
 }
 
-const CanvasWheel = (props: CanvasPropsWheel): JSX.Element => {
-  const { data, width, height, ...rest } = props;
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas === null) return;
-    const context = canvas.getContext("2d");
-    if (context === null) return;
-    const scale = () => {
-      const ratio = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(width * ratio);
-      canvas.height = Math.floor(height * ratio);
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
-      return ratio;
-    };
-    const ratio = scale();
-    wheel(canvas, context, data, ratio);
-  }, [data, width, height]);
-
+const CanvasWheel = (props: CanvasWheelProps): JSX.Element => {
+  const { draw, width, height, ...rest } = props;
+  const canvasRef = useCanvasData(draw, width, height);
   return (
     <canvas
       ref={canvasRef}
-      width={props.width}
-      height={props.height}
+      width={`${width}px`}
+      height={`${height}px`}
       {...rest}
     />
   );

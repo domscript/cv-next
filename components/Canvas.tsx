@@ -77,7 +77,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   ) {
     const ratio = scale();
     const myButtons = context.canvas.getElementsByClassName("myButtons")[0];
-    const homeButtons = context.canvas.getElementsByClassName("homeButtons")[0];
     const margin = 360 * ratio;
     let p = 0;
     p = p + 0.01 * count;
@@ -182,15 +181,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       const height = buttonHeight;
       buttons[i] = new ButtonMainClass(x, y, width, height, buttonData[i], el);
       buttons[i].draw(context);
-    }
-    for (let i = 0; i < amoutHome; i++) {
-      const el = homeButtons.children[i] as HTMLElement;
-      const x = (spacing / 2 + margin) * ratio;
-      const y =
-        (context.canvas.height * 0.1 + i * (buttonHeight + gap)) * ratio;
-      const width = spacing - gap;
-      const height = buttonHeight / 3;
-      pageButton[i] = new Button(x, y, width, height, el);
     }
   }
   return (

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import useCanvas, { positionAndSizeInt } from "hooks/use-canvas";
+import React from "react";
+import useCanvas from "hooks/use-canvas";
 
 export interface CanvasRobotProps {
   children: React.ReactNode;
