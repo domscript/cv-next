@@ -32,12 +32,13 @@ export default function PostPage({
   content: string;
   slug: string;
 }) {
-  const draw = useCallback(squareRobotNew, []);
   const positionAndSize: positionAndSizeInt = {
     x01: 0,
     y01: 0,
     scale: 1, // 1 === 100%
   };
+  const draw01 = squareRobotNew.bind(positionAndSize);
+  const draw = useCallback(draw01, [draw01]);
   return (
     <Layout title="Blog">
       <p className="ml-5">
@@ -59,17 +60,7 @@ export default function PostPage({
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
-            <CanvasRobot
-              width={30}
-              height={30}
-              className="mx-2"
-              draw={[
-                {
-                  draw,
-                  positionAndSize,
-                },
-              ]}
-            >
+            <CanvasRobot width={30} height={30} className="mx-2" draw={[draw]}>
               <Image
                 src={author_image}
                 alt={author}

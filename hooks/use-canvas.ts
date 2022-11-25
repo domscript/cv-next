@@ -6,14 +6,7 @@ export interface positionAndSizeInt {
 }
 
 const useCanvas = (
-  draw: {
-    draw: (
-      context: CanvasRenderingContext2D,
-      frameCount: number,
-      positionAndSize: positionAndSizeInt
-    ) => void;
-    positionAndSize: positionAndSizeInt;
-  }[],
+  draw: ((context: CanvasRenderingContext2D, frameCount: number) => void)[],
   width: number,
   height: number
 ) => {
@@ -42,7 +35,7 @@ const useCanvas = (
       if (frameCount <= 100) newCount = frameCount;
       scale();
       for (let i = 0; i < draw.length; i++) {
-        draw[i].draw(context, newCount, draw[i].positionAndSize);
+        draw[i](context, newCount);
       }
       animationFrameID = window.requestAnimationFrame(render);
     };

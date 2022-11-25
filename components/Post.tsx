@@ -28,12 +28,13 @@ export default function Post({
   compact: boolean;
   onClick?: (e: any) => void;
 }) {
-  const draw = useCallback(squareRobotNew, []);
   const positionAndSize: positionAndSizeInt = {
     x01: 0,
     y01: 0,
     scale: 1, // 1 === 100%
   };
+  const draw01 = squareRobotNew.bind(positionAndSize);
+  const draw = useCallback(draw01, [draw01]);
   return (
     <div className="w-full px-10 py-6 bg-white rounded-lg shadow-md mt-6">
       {!compact && (
@@ -75,17 +76,7 @@ export default function Post({
             Read more
           </Link>
           <div className="flex items-center">
-            <CanvasRobot
-              width={30}
-              height={30}
-              className="mx-2"
-              draw={[
-                {
-                  draw,
-                  positionAndSize,
-                },
-              ]}
-            >
+            <CanvasRobot width={30} height={30} className="mx-2" draw={[draw]}>
               <Image
                 src={post.frontmatter.author_image}
                 alt={post.frontmatter.author}

@@ -7,26 +7,17 @@ import { squareRobotNew } from "@/utils/squareRobot";
 import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 export default function NotFoundPage() {
-  const draw = useCallback(squareRobotNew, []);
   const positionAndSize: positionAndSizeInt = {
     x01: 0,
     y01: 0,
     scale: 1, // 1 === 100%
   };
+  const draw01 = squareRobotNew.bind(positionAndSize);
+  const draw = useCallback(draw01, [draw01]);
   return (
     <Layout title="Error">
       <div className="flex flex-col items-center mt-20">
-        <CanvasRobot
-          width={200}
-          height={200}
-          className="mx-auto"
-          draw={[
-            {
-              draw,
-              positionAndSize,
-            },
-          ]}
-        >
+        <CanvasRobot width={200} height={200} className="mx-auto" draw={[draw]}>
           <Image
             src="/image/c_lang.svg"
             alt=""

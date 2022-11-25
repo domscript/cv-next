@@ -17,8 +17,10 @@ export default function Header(props: { className: string }) {
     y01: 30,
     scale: 0.5, // 1 === 100%
   };
-  const draw0 = useCallback(squareRobotNew, []);
-  const draw1 = useCallback(squareRobotNew, []);
+  const draw01 = squareRobotNew.bind(positionAndSize0);
+  const draw0 = useCallback(draw01, [draw01]);
+  const draw11 = squareRobotNew.bind(positionAndSize1);
+  const draw1 = useCallback(draw11, [draw11]);
   return (
     <header className={styles}>
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -30,16 +32,7 @@ export default function Header(props: { className: string }) {
             className=""
             width={80}
             height={80}
-            draw={[
-              {
-                draw: draw0,
-                positionAndSize: positionAndSize0,
-              },
-              {
-                draw: draw1,
-                positionAndSize: positionAndSize1,
-              },
-            ]}
+            draw={[draw0, draw1]}
           >
             <Image src="/favicon.ico" width={60} height={60} alt="logo" />{" "}
           </CanvasRobot>

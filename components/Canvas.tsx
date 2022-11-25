@@ -57,9 +57,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             y01: 380 * ratio,
             scale: 0.2, // 1 === 100%
           };
-
+          const squareRobotNew1 = squareRobotNew.bind(positionAndSize);
           header(context, newCount, props.data, scale);
-          squareRobotNew(context, newCount, positionAndSize);
+          squareRobotNew1(context, newCount);
           animationFrameID = window.requestAnimationFrame(render);
         };
         render();
@@ -110,7 +110,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       // Focus button1, if appropriate
       for (let j = 0; j < amount; j++) {
         buttons[j].draw(context);
-        console.log(buttons);
 
         if (context.isPointInPath(x * ratio, y * ratio)) {
           const sort = buttons[j].el.dataset.sort as string;

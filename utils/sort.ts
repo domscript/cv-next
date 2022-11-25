@@ -64,9 +64,8 @@ export default function sort(
   init();
 
   canvas.addEventListener("pointerdown", (e: PointerEvent) => {
+    handleClick(e).sort && init();
     switch (handleClick(e).sort) {
-      case handleClick(e).sort:
-        init();
       case "bubble":
         moves = bubbleSort(array);
         break;
