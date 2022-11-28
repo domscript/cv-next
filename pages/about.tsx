@@ -1,9 +1,8 @@
 import { useCallback } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
-import CanvasRobot from "@/components/CanvasRobot";
-import { squareRobotNew } from "@/utils/squareRobot";
-import { positionAndSizeInt } from "@/hooks/use-canvas";
+import Canvas from "@/components/Canvas";
+import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
 
 export default function AboutPage() {
   const positionAndSize: positionAndSizeInt = {
@@ -15,7 +14,7 @@ export default function AboutPage() {
   const draw = useCallback(draw01, [draw01]);
   return (
     <Layout title="About">
-      <CanvasRobot width={200} height={200} className="mx-auto" draw={[draw]}>
+      <Canvas width={200} height={200} className="mx-auto" draw={[draw]}>
         <Image
           src="/image/posts/undraw_powerful_re_frhr.svg"
           alt="Powerful Girl"
@@ -23,7 +22,7 @@ export default function AboutPage() {
           height={1100}
           className="w-full rounded"
         />
-      </CanvasRobot>
+      </Canvas>
 
       <h1 className="text-5xl border-b-4 pb-5 font-bold px-10 text-gray-600">
         Hello everybody!

@@ -159,7 +159,6 @@ export class Sector {
             ((this.x - sizeX / size) * size) / 2,
             ((this.y - sizeY / size) * size) / 2
           );
-
         pBig.addPath(p1, tBig);
         context.stroke(pBig);
         context.fill(pBig);

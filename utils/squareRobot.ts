@@ -1,9 +1,21 @@
-import { positionAndSizeInt } from "@/hooks/use-canvas";
+export interface positionAndSizeInt {
+  x01: number;
+  y01: number;
+  scale: number;
+}
+
+let newCount = 0;
+
 export function squareRobotNew(
   this: positionAndSizeInt,
   context: CanvasRenderingContext2D,
-  frameCount: number
+  frameCount: number,
+  ratio: number
 ) {
+  frameCount = frameCount % 200;
+  if (frameCount > 100) newCount = 200 - frameCount;
+  if (frameCount <= 100) newCount = frameCount;
+  frameCount = newCount;
   function robotBody(
     x: number,
     y01: number,
@@ -156,9 +168,10 @@ export function squareRobotNew(
     context.stroke();
   }
 
-  const { x01, y01, scale } = this as positionAndSizeInt;
+  let { x01, y01, scale } = this as positionAndSizeInt;
   let p = 0,
     sign = frameCount;
+  (x01 = x01 * ratio), (y01 = y01 * ratio);
   const x = (context.canvas.width / 2) * scale + x01,
     y = context.canvas.height * scale + y01,
     size = Math.min(

@@ -2,9 +2,8 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/Layout";
-import CanvasRobot from "@/components/CanvasRobot";
-import { squareRobotNew } from "@/utils/squareRobot";
-import { positionAndSizeInt } from "@/hooks/use-canvas";
+import Canvas from "@/components/Canvas";
+import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
 
 export default function NotFoundPage() {
   const positionAndSize: positionAndSizeInt = {
@@ -17,7 +16,7 @@ export default function NotFoundPage() {
   return (
     <Layout title="Error">
       <div className="flex flex-col items-center mt-20">
-        <CanvasRobot width={200} height={200} className="mx-auto" draw={[draw]}>
+        <Canvas width={200} height={200} className="mx-auto" draw={[draw]}>
           <Image
             src="/image/c_lang.svg"
             alt=""
@@ -25,7 +24,7 @@ export default function NotFoundPage() {
             height={70}
             className="bg-gray-800 rounded-2xl"
           />
-        </CanvasRobot>
+        </Canvas>
 
         <h1 className="text-6xl my-5">Sorry!</h1>
 

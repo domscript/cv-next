@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import styles from "@/styles/Home.module.css";
-import CanvasWheel from "@/components/CanvasWheel";
+import Canvas from "@/components/Canvas";
 import { wheel } from "@/utils/wheel";
 
 import {
@@ -47,7 +47,7 @@ export default function WheelComponent(): JSX.Element {
 
   return (
     <section className={styles.card} key="wheel">
-      <CanvasWheel width={500} height={500} className="wheel" draw={[draw0]}>
+      <Canvas width={500} height={500} className="wheel" draw={[draw0]}>
         <section className="myButtons">
           {listItems.map((el) => {
             const text = el.title.toLowerCase();
@@ -58,7 +58,7 @@ export default function WheelComponent(): JSX.Element {
             );
           })}
         </section>
-      </CanvasWheel>
+      </Canvas>
     </section>
   );
 }

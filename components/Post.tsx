@@ -3,9 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
 import { cutText } from "@/utils/cutText";
-import CanvasRobot from "./CanvasRobot";
-import { squareRobotNew } from "@/utils/squareRobot";
-import { positionAndSizeInt } from "@/hooks/use-canvas";
+import Canvas from "./Canvas";
+import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
 
 export interface PostsInt {
   slug: string;
@@ -76,7 +75,7 @@ export default function Post({
             Read more
           </Link>
           <div className="flex items-center">
-            <CanvasRobot width={30} height={30} className="mx-2" draw={[draw]}>
+            <Canvas width={30} height={30} className="mx-2" draw={[draw]}>
               <Image
                 src={post.frontmatter.author_image}
                 alt={post.frontmatter.author}
@@ -84,7 +83,7 @@ export default function Post({
                 height={30}
                 className="mx-4 w-10 h-10 object-cover rounded pl-10 hidden sm:block"
               />
-            </CanvasRobot>
+            </Canvas>
             <h3 className="text-gray-700 font-bold">
               {post.frontmatter.author}
             </h3>

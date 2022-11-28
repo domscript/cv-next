@@ -1,4 +1,4 @@
-import { CanvasProps } from "@/components/Canvas";
+import DataSVG from "./pathsSVG";
 
 export class Me {
   constructor(
@@ -6,7 +6,7 @@ export class Me {
     public y: number,
     public width: number,
     public height: number,
-    public cardsSrc: CanvasProps["data"]
+    public cardsSrc: DataSVG[]
   ) {}
 
   draw(

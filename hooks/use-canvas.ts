@@ -1,12 +1,11 @@
 import { useRef, useEffect } from "react";
-export interface positionAndSizeInt {
-  x01: number;
-  y01: number;
-  scale: number;
-}
 
 const useCanvas = (
-  draw: ((context: CanvasRenderingContext2D, frameCount: number) => void)[],
+  draw: ((
+    context: CanvasRenderingContext2D,
+    frameCount: number,
+    ratio: number
+  ) => void)[],
   width: number,
   height: number
 ) => {
@@ -23,19 +22,16 @@ const useCanvas = (
       canvas.height = Math.floor(height * ratio);
       canvas.style.width = width + "px";
       canvas.style.height = height + "px";
+      return ratio;
     };
     let frameCount = 0;
-    let newCount = 0;
     let animationFrameID: number;
     const render = () => {
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       frameCount++;
-      frameCount = frameCount % 200;
-      if (frameCount > 100) newCount = 200 - frameCount;
-      if (frameCount <= 100) newCount = frameCount;
-      scale();
+      const ratio = scale();
       for (let i = 0; i < draw.length; i++) {
-        draw[i](context, newCount);
+        draw[i](context, frameCount, ratio);
       }
       animationFrameID = window.requestAnimationFrame(render);
     };

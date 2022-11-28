@@ -13,6 +13,72 @@ export interface cardsSrcInt {
   }[];
 }
 const sectors: Sector[] = [];
+let timer: NodeJS.Timeout;
+function defineAngles(
+  cardsSrc: cardsSrcInt[],
+  startCondition: startConditionInt
+) {
+  const cards = cardsSrc.map((el) => el.lines.length);
+  const sum = cards.reduce((acc, el) => {
+    acc += el + startCondition.margin / 100;
+    return acc;
+  }, 0);
+  const angles = cards.reduce(
+    (acc, num, i) => {
+      acc = [
+        ...acc,
+        ((num + startCondition.margin / 100) / sum) * Math.PI * 2 + acc[i],
+      ];
+      return acc;
+    },
+    [(startCondition.angleStart * Math.PI) / 180]
+  );
+  return angles;
+}
+
+interface coordsInt {
+  x: number;
+  y: number;
+  canvasW: number;
+  canvasH: number;
+}
+
+interface startConditionInt {
+  x: number;
+  y: number;
+  radius: number;
+  margin: number;
+  angleStart: number;
+  inner: number;
+  outer: number;
+}
+function init(
+  context: CanvasRenderingContext2D,
+  angles: number[],
+  colors: [string, string, string, string][],
+  startCondition: startConditionInt,
+  coords: coordsInt,
+  cardsSrc: cardsSrcInt[],
+  ratio: number
+) {
+  for (let sector in sectors) {
+    sectors.shift();
+  }
+  for (let i = 0; i < angles.length - 1; i++) {
+    sectors[i] = new Sector(
+      startCondition.x,
+      startCondition.y,
+      startCondition.radius,
+      startCondition.inner,
+      startCondition.outer,
+      angles[i],
+      angles[i + 1 < angles.length ? i + 1 : 0],
+      cardsSrc[i].lines.length,
+      cardsSrc[i]
+    );
+    sectors[i].draw(context, colors[i], coords, ratio);
+  }
+}
 
 export function wheel(
   this: DataSVG[],
@@ -20,22 +86,10 @@ export function wheel(
   frameCount: number,
   ratio: number
 ) {
-  console.log(frameCount);
   frameCount = (2 * Math.PI * frameCount) / 50;
   const data = [...this];
   if (data.length <= 0) return;
-  const newData = data
-    .map((el) => el.group)
-    .reduce((acc: string[], el) => {
-      if (acc.length === 0) {
-        acc = [el];
-      } else if (acc.includes(el)) {
-        acc = [...acc];
-      } else {
-        acc.push(el);
-      }
-      return acc;
-    }, []);
+  const newData = [...new Set(data.map((el) => el.group))] as string[];
   const cardsSrc: cardsSrcInt[] = newData.map((el) => ({
     group: el,
     lines: [],
@@ -50,28 +104,21 @@ export function wheel(
         });
     });
   });
-  const margin = 10;
-  const angleStart = 200;
-  const [inner, outer] = [40, 15];
-  const rectWidth =
-    (1 - (1 - (inner + outer) / 100) * Math.cos(Math.PI / 4)) / 2;
-  function defineAngles(cardsSrc: cardsSrcInt[], angleStart: number) {
-    const cards = cardsSrc.map((el) => el.lines.length);
-    const sum = cards.reduce((acc, el) => {
-      acc += el + margin / 100;
-      return acc;
-    }, 0);
-    const angles = cards.reduce(
-      (acc, num, i) => {
-        acc = [...acc, ((num + margin / 100) / sum) * Math.PI * 2 + acc[i]];
-        return acc;
-      },
-      [(angleStart * Math.PI) / 180]
-    );
-    return angles;
-  }
 
-  const angles = defineAngles(cardsSrc, angleStart);
+  const startCondition = {
+    x: context.canvas.width / 2,
+    y: context.canvas.height / 2,
+    radius: Math.min(context.canvas.width / 2, context.canvas.height / 2),
+    margin: 10,
+    angleStart: 200, // deg
+    inner: 40, // 40%
+    outer: 15, // 15%
+  };
+
+  // const rectWidth =
+  //   (1 - (1 - (inner + outer) / 100) * Math.cos(Math.PI / 4)) / 2;
+
+  const angles = defineAngles(cardsSrc, startCondition);
 
   const colors: [string, string, string, string][] = [
     ["#274d83", "#5b98f0", "#b5d0f8", "#d7e6fc"],
@@ -91,65 +138,39 @@ export function wheel(
     canvasH: context.canvas.height,
   };
 
-  function init() {
-    console.log(" hi sectors");
-    for (let sector in sectors) {
-      sectors.shift();
-    }
-    for (let i = 0; i < angles.length - 1; i++) {
-      const [x, y] = [context.canvas.width / 2, context.canvas.height / 2];
-      const radius = context.canvas.width / 2;
-      sectors[i] = new Sector(
-        x,
-        y,
-        radius,
-        inner,
-        outer,
-        angles[i] + frameCount,
-        angles[i + 1 < angles.length ? i + 1 : 0] + frameCount,
-        cardsSrc[i].lines.length,
-        cardsSrc[i]
-      );
-      sectors[i].draw(context, colors[i], coords, ratio);
-    }
-  }
+  if (sectors.length <= 0)
+    init(context, angles, colors, startCondition, coords, cardsSrc, ratio);
 
-  if (sectors.length <= 0) init();
+  // context.canvas.addEventListener(
+  //   "pointerdown",
+  //   (e: PointerEvent) => {
+  //     if (timer) clearTimeout(timer);
 
-  let timer: NodeJS.Timeout;
-  context.canvas.addEventListener(
-    "pointerdown",
-    (e: PointerEvent) => {
-      if (timer) clearTimeout(timer);
+  //     const clickCoords = handleClick(e);
+  //     coords.x = clickCoords.x;
+  //     coords.y = clickCoords.y;
+  //     coords.canvasW = clickCoords.canvasW;
+  //     coords.canvasH = clickCoords.canvasH;
+  //     timer = setTimeout(() => {
+  //       [coords.x, coords.y] = [0, 0];
+  //     }, 200);
 
-      const clickCoords = handleClick(e);
-      coords.x = clickCoords.x;
-      coords.y = clickCoords.y;
-      coords.canvasW = clickCoords.canvasW;
-      coords.canvasH = clickCoords.canvasH;
-      timer = setTimeout(() => {
-        [coords.x, coords.y] = [0, 0];
-      }, 200);
+  //     for (let i = 0; i < sectors.length; i++) {
+  //       sectors[i].draw(context, colors[i], coords, ratio);
+  //     }
+  //   },
+  //   false
+  // );
 
-      // context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
-      for (let i = 0; i < sectors.length; i++) {
-        sectors[i].draw(context, colors[i], coords, ratio);
-      }
-    },
-    false
-  );
-
-  function handleClick(e: PointerEvent) {
-    // Calculate click coordinates
-    const { height, width, top } = context.canvas.getBoundingClientRect();
-    const x = e.clientX - context.canvas.offsetLeft;
-    const y = e.clientY - top;
-    const canvasW = width;
-    const canvasH = height;
-    console.log({ x, y, canvasW, canvasH });
-    return { x, y, canvasW, canvasH };
-  }
+  // function handleClick(e: PointerEvent) {
+  //   // Calculate click coordinates
+  //   const { height, width, top } = context.canvas.getBoundingClientRect();
+  //   const x = e.clientX - context.canvas.offsetLeft;
+  //   const y = e.clientY - top;
+  //   const canvasW = width;
+  //   const canvasH = height;
+  //   return { x, y, canvasW, canvasH };
+  // }
 
   for (let i = 0; i < sectors.length; i++) {
     // context.clearRect(

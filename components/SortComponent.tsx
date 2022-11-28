@@ -1,6 +1,8 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import styles from "@/styles/Home.module.css";
 import Canvas from "@/components/Canvas";
+import sort from "@/utils/sort";
+
 import {
   html5,
   JavaScript,
@@ -21,37 +23,33 @@ import {
 } from "@/utils/pathsSVG";
 
 export default function SortComponent(): JSX.Element {
-  const [buttonClicked1, setButtonClicked1] = useState("lang"); // tool
-  const dataSVGlang = useMemo(() => {
-    return [html5, SaSS, PostCSS, Clang, python, Css, TypeScript, JavaScript];
+  const listItems = useMemo(() => {
+    return [
+      html5,
+      SaSS,
+      PostCSS,
+      Clang,
+      python,
+      Css,
+      TypeScript,
+      JavaScript,
+      Webpack,
+      NodeJS,
+      TailwindCSS,
+      vsCode,
+      git,
+      English,
+      Espanol,
+      Deutsch,
+    ];
   }, []);
 
-  const dataSVGtool = useMemo(() => {
-    return [Webpack, NodeJS, TailwindCSS, vsCode, git];
-  }, []);
-  const dataSVGlangSpeak = useMemo(() => {
-    return [English, Espanol, Deutsch];
-  }, []);
-
-  const buttonDataHandler = useCallback((buttonClick: string): void => {
-    setButtonClicked1(buttonClick);
-  }, []);
+  const draw01 = sort.bind(listItems);
+  const draw0 = useCallback(draw01, [draw01]);
 
   return (
     <section className={styles.card} key="sort">
-      <Canvas
-        width={500}
-        height={500}
-        className="sort"
-        data={
-          buttonClicked1 === "lang"
-            ? dataSVGlang
-            : buttonClicked1 === "tool"
-            ? dataSVGtool
-            : dataSVGlangSpeak
-        }
-        onChangeData={buttonDataHandler}
-      >
+      <Canvas width={500} height={500} className="sort" draw={[draw0]}>
         <section className="myButtons">
           <button className="btn" type="button" data-sort="bubble">
             BS

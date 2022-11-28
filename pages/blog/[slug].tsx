@@ -8,10 +8,9 @@ import Layout from "@/components/Layout";
 import CategoryLabel from "@/components/CategoryLabel";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { useCallback } from "react";
-import CanvasRobot from "@/components/CanvasRobot";
-import { squareRobotNew } from "@/utils/squareRobot";
+import Canvas from "@/components/Canvas";
+import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
 import { GetStaticProps, GetStaticPaths } from "next";
-import { positionAndSizeInt } from "@/hooks/use-canvas";
 
 interface PostPageint {
   title: string;
@@ -60,7 +59,7 @@ export default function PostPage({
 
         <div className="flex justify-between items-center bg-gray-100 p-2 my-8">
           <div className="flex items-center">
-            <CanvasRobot width={30} height={30} className="mx-2" draw={[draw]}>
+            <Canvas width={30} height={30} className="mx-2" draw={[draw]}>
               <Image
                 src={author_image}
                 alt={author}
@@ -68,7 +67,7 @@ export default function PostPage({
                 height={20}
                 className="mx-4 w-10 h-10 object-cover rounded hidden sm:block"
               />
-            </CanvasRobot>
+            </Canvas>
             <h4>{author}</h4>
           </div>
           <div className="mr-4">{date}</div>
