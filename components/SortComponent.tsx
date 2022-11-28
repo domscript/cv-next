@@ -20,6 +20,9 @@ import {
   English,
   Espanol,
   Deutsch,
+  lang,
+  WebpackButton,
+  TypeScriptButton,
 } from "@/utils/pathsSVG";
 
 export default function SortComponent(): JSX.Element {
@@ -41,7 +44,13 @@ export default function SortComponent(): JSX.Element {
       English,
       Espanol,
       Deutsch,
+      TypeScriptButton,
+      WebpackButton,
+      lang,
     ];
+  }, []);
+  const dataMain = useMemo(() => {
+    return [TypeScriptButton, WebpackButton, lang];
   }, []);
 
   const draw01 = sort.bind(listItems);
@@ -66,6 +75,17 @@ export default function SortComponent(): JSX.Element {
           <button className="btn" type="button" data-sort="insertion">
             IS
           </button>
+        </section>
+        <section className="sortButtons">
+          {dataMain.map((el) => {
+            const text = el.title.toLowerCase();
+            // const group = el.group.toLowerCase();
+            return (
+              <button key={text} className="btn" type="button" data-sort={text}>
+                {text}
+              </button>
+            );
+          })}
         </section>
       </Canvas>
     </section>

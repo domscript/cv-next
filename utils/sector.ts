@@ -10,7 +10,8 @@ export class Sector {
     public angleStart = 0, // deg
     public angle = 180, // deg
     public icons = 1,
-    public cardsSrc: cardsSrcInt
+    public cardsSrc: cardsSrcInt,
+    public colors: [string, string, string, string]
   ) {}
 
   rotateTo(sector: Sector, frameCount = 10) {
@@ -24,17 +25,7 @@ export class Sector {
     }
   }
 
-  draw(
-    context: CanvasRenderingContext2D,
-    color: [string, string, string, string],
-    coords: {
-      x: number;
-      y: number;
-      canvasW: number;
-      canvasH: number;
-    },
-    ratio: number
-  ) {
+  draw(context: CanvasRenderingContext2D, ratio: number) {
     const angleS = this.angleStart;
     const angleE = this.angle;
     const cosS = Math.cos(angleS);
@@ -55,8 +46,8 @@ export class Sector {
       this.y + this.radius * sinA * (1 - this.outer / 100);
 
     context.beginPath();
-    context.fillStyle = color[3];
-    context.strokeStyle = color[1];
+    context.fillStyle = this.colors[3];
+    context.strokeStyle = this.colors[1];
     context.moveTo(radiusStartX, radiusStartY);
     context.arc(this.x, this.y, this.radius, this.angleStart, this.angle);
     context.lineTo(radiusOuterEndX, radiusOuterEndY);
@@ -66,7 +57,7 @@ export class Sector {
     context.stroke();
 
     context.beginPath();
-    context.fillStyle = color[2];
+    context.fillStyle = this.colors[2];
     context.moveTo(radiusStartX, radiusStartY);
     context.arc(this.x, this.y, radiusOuter, this.angleStart, this.angle);
     context.lineTo(radiusOuterEndX, radiusOuterEndY);
@@ -76,7 +67,7 @@ export class Sector {
     context.fill();
     context.stroke();
 
-    context.fillStyle = color[0];
+    context.fillStyle = this.colors[0];
     context.font = `${0.75 * ratio}rem Arial monospace`;
     context.textBaseline = "middle";
     context.textAlign = "center";
@@ -107,10 +98,6 @@ export class Sector {
         );
       }
     }
-    const [xClick, yClick] = [
-      (coords.x * this.radius * 2) / coords.canvasW,
-      (coords.y * this.radius * 2) / coords.canvasH,
-    ];
     for (let i = 1; i <= this.icons; i++) {
       context.font = `${0.6 * ratio}rem Arial`;
       context.textBaseline = "middle";
@@ -118,7 +105,7 @@ export class Sector {
       const angDDD = lerp(angleS, angleE, i / (this.icons + 1));
       const iconsX = Math.cos(angDDD) * radiusIcons;
       const iconsY = Math.sin(angDDD) * radiusIcons;
-      context.fillStyle = color[0];
+      context.fillStyle = this.colors[0];
       const sizeXY = this.cardsSrc.lines[i - 1].viewBox.split(" ");
       const [sizeX, sizeY] = [
         Number(sizeXY[2]) - Number(sizeXY[0]),
@@ -138,33 +125,36 @@ export class Sector {
 
       let coof = 1;
       if (
-        iconX <= xClick &&
-        xClick <= iconXCenter + sizeX / size / 2 &&
-        iconY <= yClick &&
-        yClick <= iconYCenter + sizeY / size / 2
+        iconXCenter + sizeX / size / 2 >= context.canvas.width / 2 &&
+        iconXCenter - sizeX / size / 2 <= context.canvas.width / 2 &&
+        iconYCenter <= context.canvas.height / 4
       ) {
-        console.log(
-          iconX,
-          xClick,
-          iconXCenter + sizeX / size / 2,
-          iconY,
-          yClick,
-          iconYCenter + sizeY / size / 2
-        );
         coof = coof * 1.1;
         const pBig = new Path2D();
         const tBig = m
-          .scale((1 / size) * 2)
+          .scale(1 / size)
           .translate(
-            ((this.x - sizeX / size) * size) / 2,
-            ((this.y - sizeY / size) * size) / 2
+            (this.x - sizeX / size / 2) * size,
+            (this.y - sizeY / size) * size
           );
         pBig.addPath(p1, tBig);
         context.stroke(pBig);
         context.fill(pBig);
+        const lineN = this.cardsSrc.lines[i - 1].text.length;
+        for (let j = 0; j < lineN; j++) {
+          context.font = `${2 * ratio}rem Arial monospace`;
+          context.fillText(
+            this.cardsSrc.lines[i - 1].text[j],
+            this.x,
+            this.y +
+              (sizeY / size) *
+                ((j * (lineN === 1 ? 1 : 1) + 1) * (lineN === 1 ? 0.8 : 0.6))
+          );
+        }
       } else {
         coof = 1;
       }
+      context.font = `${0.6 * ratio}rem Arial`;
 
       const p = new Path2D();
       const t = m

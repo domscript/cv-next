@@ -14,6 +14,7 @@ export interface cardsSrcInt {
 }
 const sectors: Sector[] = [];
 let timer: NodeJS.Timeout;
+
 function defineAngles(
   cardsSrc: cardsSrcInt[],
   startCondition: startConditionInt
@@ -52,43 +53,25 @@ interface startConditionInt {
   inner: number;
   outer: number;
 }
+
+const colors: [string, string, string, string][] = [
+  ["#274d83", "#5b98f0", "#b5d0f8", "#d7e6fc"],
+  ["#407676", "#8be2e4", "#c4f3f3", "#dbf9f9"],
+  ["#80384d", "#e47a98", "#f3c2d0", "#f9dfe6"],
+  ["#815a30", "#f6c08b", "#fadbba", "#fcebd7"],
+  ["#4a7d5c", "#9cedb7", "#cff7dc", "#e2fbea"],
+  ["#80384d", "#e47a98", "#f3c2d0", "#f9dfe6"],
+  ["#815a30", "#f6c08b", "#fadbba", "#fcebd7"],
+  ["#4a7d5c", "#9cedb7", "#cff7dc", "#e2fbea"],
+];
+
+let rectWidth: number;
+
 function init(
   context: CanvasRenderingContext2D,
-  angles: number[],
-  colors: [string, string, string, string][],
-  startCondition: startConditionInt,
-  coords: coordsInt,
-  cardsSrc: cardsSrcInt[],
+  data: DataSVG[],
   ratio: number
 ) {
-  for (let sector in sectors) {
-    sectors.shift();
-  }
-  for (let i = 0; i < angles.length - 1; i++) {
-    sectors[i] = new Sector(
-      startCondition.x,
-      startCondition.y,
-      startCondition.radius,
-      startCondition.inner,
-      startCondition.outer,
-      angles[i],
-      angles[i + 1 < angles.length ? i + 1 : 0],
-      cardsSrc[i].lines.length,
-      cardsSrc[i]
-    );
-    sectors[i].draw(context, colors[i], coords, ratio);
-  }
-}
-
-export function wheel(
-  this: DataSVG[],
-  context: CanvasRenderingContext2D,
-  frameCount: number,
-  ratio: number
-) {
-  frameCount = (2 * Math.PI * frameCount) / 50;
-  const data = [...this];
-  if (data.length <= 0) return;
   const newData = [...new Set(data.map((el) => el.group))] as string[];
   const cardsSrc: cardsSrcInt[] = newData.map((el) => ({
     group: el,
@@ -115,62 +98,42 @@ export function wheel(
     outer: 15, // 15%
   };
 
-  // const rectWidth =
-  //   (1 - (1 - (inner + outer) / 100) * Math.cos(Math.PI / 4)) / 2;
+  rectWidth =
+    (1 -
+      (1 - (startCondition.inner + startCondition.outer) / 100) *
+        Math.cos(Math.PI / 4)) /
+    2;
 
   const angles = defineAngles(cardsSrc, startCondition);
 
-  const colors: [string, string, string, string][] = [
-    ["#274d83", "#5b98f0", "#b5d0f8", "#d7e6fc"],
-    ["#407676", "#8be2e4", "#c4f3f3", "#dbf9f9"],
-    ["#80384d", "#e47a98", "#f3c2d0", "#f9dfe6"],
-    ["#815a30", "#f6c08b", "#fadbba", "#fcebd7"],
-    ["#4a7d5c", "#9cedb7", "#cff7dc", "#e2fbea"],
-    ["#80384d", "#e47a98", "#f3c2d0", "#f9dfe6"],
-    ["#815a30", "#f6c08b", "#fadbba", "#fcebd7"],
-    ["#4a7d5c", "#9cedb7", "#cff7dc", "#e2fbea"],
-  ];
+  for (let i = 0; i < angles.length - 1; i++) {
+    sectors[i] = new Sector(
+      startCondition.x,
+      startCondition.y,
+      startCondition.radius,
+      startCondition.inner,
+      startCondition.outer,
+      angles[i],
+      angles[i + 1 < angles.length ? i + 1 : 0],
+      cardsSrc[i].lines.length,
+      cardsSrc[i],
+      colors[i]
+    );
+    sectors[i].draw(context, ratio);
+  }
+}
 
-  const coords = {
-    x: 0,
-    y: 0,
-    canvasW: context.canvas.width,
-    canvasH: context.canvas.height,
-  };
+export function wheel(
+  this: DataSVG[],
+  context: CanvasRenderingContext2D,
+  frameCount: number,
+  ratio: number
+) {
+  const data = [...this];
+  frameCount = (2 * Math.PI * frameCount) / 50;
+  if (data.length <= 0) return;
 
-  if (sectors.length <= 0)
-    init(context, angles, colors, startCondition, coords, cardsSrc, ratio);
-
-  // context.canvas.addEventListener(
-  //   "pointerdown",
-  //   (e: PointerEvent) => {
-  //     if (timer) clearTimeout(timer);
-
-  //     const clickCoords = handleClick(e);
-  //     coords.x = clickCoords.x;
-  //     coords.y = clickCoords.y;
-  //     coords.canvasW = clickCoords.canvasW;
-  //     coords.canvasH = clickCoords.canvasH;
-  //     timer = setTimeout(() => {
-  //       [coords.x, coords.y] = [0, 0];
-  //     }, 200);
-
-  //     for (let i = 0; i < sectors.length; i++) {
-  //       sectors[i].draw(context, colors[i], coords, ratio);
-  //     }
-  //   },
-  //   false
-  // );
-
-  // function handleClick(e: PointerEvent) {
-  //   // Calculate click coordinates
-  //   const { height, width, top } = context.canvas.getBoundingClientRect();
-  //   const x = e.clientX - context.canvas.offsetLeft;
-  //   const y = e.clientY - top;
-  //   const canvasW = width;
-  //   const canvasH = height;
-  //   return { x, y, canvasW, canvasH };
-  // }
+  if (sectors.length <= 0) init(context, data, ratio);
 
   for (let i = 0; i < sectors.length; i++) {
     // context.clearRect(
@@ -197,7 +160,7 @@ export function wheel(
     //   context.canvas.width,
     //   context.canvas.height
     // );
-    sectors[i].draw(context, colors[i], coords, ratio);
+    sectors[i].draw(context, ratio);
     sectors[i].rotateTo(sectors[i]);
   }
 }
