@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import styles from "@/styles/Home.module.css";
 import Canvas from "@/components/Canvas";
-import { wheel } from "@/utils/wheel";
+import { wheel } from "@/utils/wheel/wheel";
 
 import {
   Events,
