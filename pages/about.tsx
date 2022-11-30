@@ -2,7 +2,10 @@ import { useCallback } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import Canvas from "@/components/Canvas";
-import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
+import {
+  squareRobotNew,
+  positionAndSizeInt,
+} from "@/utils/squareRobot/squareRobot";
 
 export default function AboutPage() {
   const positionAndSize: positionAndSizeInt = {

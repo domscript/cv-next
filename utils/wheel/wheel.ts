@@ -1,4 +1,4 @@
-import DataSVG from "../pathsSVG";
+import DataSVG from "@/utils/pathsSVG";
 import { init } from "./initWheel";
 import { Sector } from "./sector";
 let sectors: Sector[] = [];

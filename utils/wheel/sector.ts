@@ -1,4 +1,5 @@
-import { lerp } from "../math";
+import { lerp } from "@/utils/math";
+
 import {
   cardsSrcInt,
   startConditionInt,

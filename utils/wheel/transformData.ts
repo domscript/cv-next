@@ -1,4 +1,4 @@
-import DataSVG from "../pathsSVG";
+import DataSVG from "@/utils/pathsSVG";
 import { cardsSrcInt } from "./wheelInterfaces";
 
 export function transformData(data: DataSVG[]): cardsSrcInt[] {

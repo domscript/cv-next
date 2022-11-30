@@ -1,11 +1,11 @@
 import { useCallback, useState, useMemo } from "react";
 import styles from "@/styles/Home.module.css";
 import Canvas from "@/components/Canvas";
-import { header } from "@/utils/header";
-import { ButtonMainClass } from "@/utils/buttonMainClass";
-import { Button } from "@/utils/button";
-import { Me } from "@/utils/me";
-import { squareRobotNew } from "@/utils/squareRobot";
+import { header } from "@/utils/room/header";
+// import { ButtonMainClass } from "@/utils/buttonMainClass";
+// import { Button } from "@/utils/button";
+import { Me } from "@/utils/room/me";
+import { squareRobotNew } from "@/utils/squareRobot/squareRobot";
 
 import { JavaScript, TypeScript, git, lang } from "@/utils/pathsSVG";
 

@@ -3,7 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/Layout";
 import Canvas from "@/components/Canvas";
-import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
+import {
+  squareRobotNew,
+  positionAndSizeInt,
+} from "@/utils/squareRobot/squareRobot";
 
 export default function NotFoundPage() {
   const positionAndSize: positionAndSizeInt = {

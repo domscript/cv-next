@@ -1,4 +1,4 @@
-import DataSVG from "./pathsSVG";
+import DataSVG from "../pathsSVG";
 
 export class Me {
   constructor(

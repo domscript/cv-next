@@ -1,5 +1,5 @@
 import { Sector } from "./sector";
-import DataSVG from "../pathsSVG";
+import DataSVG from "@/utils/pathsSVG";
 import { transformData } from "./transformData";
 import { startConditionInt, anglesInt } from "./wheelInterfaces";
 import { defineAngles } from "./defineAngles";

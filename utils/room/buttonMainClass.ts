@@ -1,78 +1,41 @@
-import { lerp } from "./math";
-import DataSVG from "./pathsSVG";
-interface Queue {
-  x: number;
-  y: number;
-}
-
-export class Column {
-  queue: Queue[];
+import DataSVG from "@/utils/pathsSVG";
+export class ButtonMainClass {
   constructor(
     public x: number,
     public y: number,
     public width: number,
     public height: number,
-    public data: DataSVG
-  ) {
-    this.queue = [];
-  }
-
-  moveTo(loc: Column, yOffset = 1, frameCount = 20) {
-    // frameCount always should be Int round Up
-    // it makes this func independent from outside
-    frameCount = Math.ceil(frameCount);
-    for (let i = 1; i <= frameCount; i++) {
-      const t = i / frameCount;
-      const u = Math.sin(t * Math.PI);
-      this.queue.push({
-        x: lerp(this.x, loc.x, t),
-        y: lerp(this.y, loc.y, t) + ((u * this.width) / 3) * yOffset,
-      });
-    }
-  }
+    public data: DataSVG,
+    public el: HTMLElement
+  ) {}
 
   draw(context: CanvasRenderingContext2D) {
     const data = this.data;
-
     let changed = false;
-    if (this.queue.length > 0) {
-      const { x, y } = this.queue.shift() as Queue;
-      this.x = x;
-      this.y = y;
-      changed = true;
-    }
+
     const left = this.x - this.width / 2;
     const top = this.y - this.height;
     const right = this.x + this.width / 2;
+    const center = this.x;
+    const el = this.el;
     const [width, height] = [this.width, this.height];
 
     context.beginPath();
     context.fillStyle = data.detail[0].fill;
     context.moveTo(left, top);
     context.lineTo(left, this.y);
-    context.ellipse(
-      this.x,
-      this.y,
-      this.width / 2,
-      this.width / 4,
-      0,
-      Math.PI,
-      Math.PI * 2,
-      true
-    );
+    context.lineTo(right, this.y);
     context.lineTo(right, top);
-    context.ellipse(
-      this.x,
-      top,
-      this.width / 2,
-      this.width / 4,
-      0,
-      0,
-      Math.PI * 2,
-      true
-    );
+    context.lineTo(left, top);
     context.fill();
     context.stroke();
+
+    // Define clickable area
+    context.beginPath();
+    context.rect(left, top, width, height);
+
+    // Draw focus ring, if appropriate
+    context.drawFocusIfNeeded(el);
 
     const sizeXY = data.viewBox?.split(" ");
     const [sizeX, sizeY] = [
@@ -96,7 +59,6 @@ export class Column {
         );
 
       p.addPath(p1, t);
-      // context.stroke(p);
       context.fill(p);
     }
     return changed;

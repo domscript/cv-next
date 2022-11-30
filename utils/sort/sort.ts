@@ -1,12 +1,14 @@
 import { Column } from "./column";
 import { Button } from "./button";
 import { ButtonMainClass } from "./buttonMainClass";
-import { bubbleSort } from "./algorithms/bubbleSort";
-import { bubbleSortBack } from "./algorithms/bubbleSortBack";
-import { selectionSort } from "./algorithms/selectionSort";
-import { selectionSortBack } from "./algorithms/selectionSortBack";
-import { insertionSort } from "./algorithms/insertionSort";
-import DataSVG from "./pathsSVG";
+import DataSVG from "@/utils/pathsSVG";
+import {
+  bubbleSort,
+  bubbleSortBack,
+  selectionSort,
+  selectionSortBack,
+  insertionSort,
+} from "./algorithms";
 
 export interface Moves {
   indices: [number, number];
@@ -83,6 +85,7 @@ export default function sort(
       cols[i] = new Column(x, y, width, height, colsData);
     }
   }
+
   if (cols.length <= 0) init(data);
 
   context.canvas.addEventListener("pointerdown", (e: PointerEvent) => {

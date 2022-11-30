@@ -1,4 +1,4 @@
-import DataSVG from "./pathsSVG";
+import DataSVG from "@/utils/pathsSVG";
 export class ButtonMainClass {
   constructor(
     public x: number,

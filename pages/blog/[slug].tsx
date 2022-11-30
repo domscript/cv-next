@@ -9,7 +9,10 @@ import CategoryLabel from "@/components/CategoryLabel";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { useCallback } from "react";
 import Canvas from "@/components/Canvas";
-import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
+import {
+  squareRobotNew,
+  positionAndSizeInt,
+} from "@/utils/squareRobot/squareRobot";
 import { GetStaticProps, GetStaticPaths } from "next";
 
 interface PostPageint {

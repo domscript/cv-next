@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import styles from "@/styles/Home.module.css";
 import Canvas from "@/components/Canvas";
-import sort from "@/utils/sort";
+import sort from "@/utils/sort/sort";
 
 import {
   html5,

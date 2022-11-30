@@ -1,8 +1,8 @@
 import DataSVG from "@/utils/pathsSVG";
-import { Room } from "@/utils/room";
-import { ButtonMainClass } from "@/utils/buttonMainClass";
-import { Button } from "@/utils/button";
-import { Me } from "@/utils/me";
+import { Room } from "@/utils/room/room";
+import { ButtonMainClass } from "@/utils/room/buttonMainClass";
+import { Button } from "@/utils/room/button";
+import { Me } from "@/utils/room/me";
 
 export interface positionAndSizeInt {
   x01: number;

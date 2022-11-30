@@ -2,7 +2,10 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Canvas from "./Canvas";
-import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
+import {
+  squareRobotNew,
+  positionAndSizeInt,
+} from "@/utils/squareRobot/squareRobot";
 
 export default function Header(props: { className: string }) {
   const styles = `bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 text-lime-300 font-bold shadow w-full ${props.className}`;

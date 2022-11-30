@@ -4,7 +4,10 @@ import Image from "next/image";
 import CategoryLabel from "./CategoryLabel";
 import { cutText } from "@/utils/cutText";
 import Canvas from "./Canvas";
-import { squareRobotNew, positionAndSizeInt } from "@/utils/squareRobot";
+import {
+  squareRobotNew,
+  positionAndSizeInt,
+} from "@/utils/squareRobot/squareRobot";
 
 export interface PostsInt {
   slug: string;
